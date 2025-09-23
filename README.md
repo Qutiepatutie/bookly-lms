@@ -14,6 +14,8 @@ bookly-lms/
 
 ## SETUP INSTRUCTIONS
 
+> **Note**: Empty directories have ".gitkeep" files in them, you can delete it once you add actual files in the folder
+
 ### 1. Clone repo
 
 ```
@@ -24,6 +26,7 @@ cd bookly-lms
 ### 2. Setup backend
 
 #### Setup venv
+> (You can skip this)
 
 ```
 python -m venv venv
