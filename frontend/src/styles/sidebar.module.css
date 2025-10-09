@@ -1,0 +1,67 @@
+.sidebar {
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 15vw;
+    border-right: 1px solid #4D643A;
+    /* background-color: #6F725F; */
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #4D643A;
+    margin: 0;
+}
+
+.header {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: #4D643A;
+}
+
+.buttons {
+    padding: 25px;
+    flex-grow: 1;
+}
+
+.buttons div {
+    display: flex;
+    /* background-color: grey; */
+    border-radius: 5px;
+    margin-bottom: 27px;
+    padding-left: 10px;
+    height: 40px;
+    justify-content: left;
+    align-items: center;
+    font-size: 19.06px;
+    user-select: none;
+}
+
+.buttons div:not(.focused):hover {
+    outline: 2px solid #4D643A;
+}
+
+.focused {
+    background-color:#4D643A;
+    color: white;
+}
+
+.focused .icons {
+    filter: invert(1);
+    
+}
+
+.icons {
+    width: 20px;
+    height: 20px;
+    margin-right: 27px;
+    /* filter: invert(1); */ /*make icon white*/
+}
+
+.footer {
+    font-size: 10px;
+    opacity: 0.8;
+    color: grey;
+    text-align: center;
+}
