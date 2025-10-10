@@ -10,11 +10,13 @@ import settings from '../assets/settings.svg'
 export default function Sidebar({ onNavigate }){
 
     const [focused, setFocused] = useState("dashboard");
+    const [collapsed, setCollapsed] = useState(false);
 
     return(
         <>
-            <div className={styles.sidebar}>
+            <div className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""}`}>
                 <div className={styles.header}>
+                    <h2 onClick={() => collapsed ? setCollapsed(false) : setCollapsed(true)}>☰</h2>
                     <h1>LibraSphere</h1>
                 </div>
                 <hr className={styles.divider} />
@@ -22,27 +24,27 @@ export default function Sidebar({ onNavigate }){
 
                     <div onClick={() => {setFocused("dashboard"); onNavigate("dashboard")}} className={focused === "dashboard" ? styles.focused : ""}>
                         <img src={dashboard} className={styles.icons}/>
-                        Dashboard
+                        <p>Dashboard</p>
                     </div>
 
                     <div onClick={() => {setFocused("library"); onNavigate("library")}} className={focused === "library" ? styles.focused : ""}>
                         <img src={library} className={styles.icons}/>
-                        Library
+                        <p>Library</p>
                     </div>
 
                     <div onClick={() => {setFocused("borrowedBooks"); onNavigate("borrowedBooks")}} className={focused === "borrowedBooks" ? styles.focused : ""}>
                         <img src={borrowedBooks} className={styles.icons}/>
-                        Borrowed Books
+                        <p>Borrowed Books</p>
                     </div>
 
                     <div onClick={() => {setFocused("settings"); onNavigate("settings")}} className={focused === "settings" ? styles.focused : ""}>
                         <img src={settings} className={styles.icons}/>
-                        Settings
+                        <p>Settings</p>
                     </div>
 
                 </div>
                 <div className={styles.footer}>
-                    <p>Bookly v1.0 | Copyright © by SOFE311 TEAM</p>
+                    <p>LibraSphere v1.0 | Copyright © by SOFE311 TEAM</p>
                 </div>
             </div>
         </>
