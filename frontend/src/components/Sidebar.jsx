@@ -10,13 +10,13 @@ import settings from '../assets/settings.svg'
 export default function Sidebar({ onNavigate }){
 
     const [focused, setFocused] = useState("dashboard");
-    const [collapsed, setCollapsed] = useState(true);
+    const [extended, setExtended] = useState(false);
 
     return(
         <>
-            <div className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""}`}>
+            <div className={`${styles.sidebar} ${extended ? styles.extended : ""}`}>
                 <div className={styles.header}>
-                    <p className={styles.burger} onClick={() => collapsed ? setCollapsed(false) : setCollapsed(true)}>☰</p>
+                    <p className={styles.burger} onClick={() => extended ? setExtended(false) : setExtended(true)}>☰</p>
                     <h1>LibraSphere</h1>
                 </div>
                 <hr className={styles.divider} />

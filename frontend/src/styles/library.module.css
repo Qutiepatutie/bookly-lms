@@ -1,0 +1,101 @@
+.library {
+    display:flex;
+    flex-direction: column;
+    margin-left: 4.5vw;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    gap: 1rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    position: sticky;
+    z-index: 4;
+}
+
+.searchBarContainer {
+    display: flex;
+    height: 35%;
+    width: 50%;
+    border-radius: 10px;
+    border: 0.5px solid #4D643A;
+}
+
+.searchBar{
+    height: 95%;
+    width: 90%;
+    border: none;
+    padding-left: 10px;
+    font-size: 1rem;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.searchBar:focus {
+    outline-color: #4D643A;
+}
+
+.searchIconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: 100%;
+    background-color: white;
+    border-radius: 0px 10px 10px 0px;
+    border-left: 1px solid
+}
+ .scroll {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    align-items: center;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    gap: 5rem;
+}
+
+.categoryHeader {
+    display: flex;
+    height: 10%;
+    width: 100%;
+    justify-content: left;
+    align-items: center;
+    font-size: 1.5rem;
+    background-color: #4D643A;
+}
+
+.categoryHeader p {
+    padding-left: 1rem;
+}
+
+.category {
+    flex: 0 0 auto;
+    margin-bottom: 30px;
+    outline: 1px solid black;
+    width: 80%;
+    height: 80vh;
+    scroll-snap-align: start;
+}
+
+.books {
+    display: flex;
+    height: 90%;
+    flex-wrap: wrap;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 37px;
+    gap: 2rem;
+}
+
+.bookPanels {
+    height: 270px;
+    width: 200px;
+    background-color: grey;
+}

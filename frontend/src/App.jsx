@@ -15,7 +15,7 @@ export default function App(){
         <>
             <div className={styles.main}>
                 <Sidebar onNavigate={setCurrentPage}/>
-
+            
                 {currentPage === "dashboard" && <Dashboard />}
                 {currentPage === "library" && <Library />}
                 {currentPage === "borrowedBooks" && <BorrowedBooks />}

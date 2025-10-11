@@ -1,15 +1,19 @@
 .sidebar {
+    position: fixed;
+    z-index: 5;
+
     display:flex;
     flex-direction: column;
     height: 100vh;
-    width: 16vw;
+    width: 4.5vw;
     border-right: 1px solid #4D643A;
     container-type: inline-size;
     transition: width 0.3s ease;
+    background-color: white;
 }
 
-.collapsed {
-    width: 4.5vw;
+.extended {
+    width: 16vw;
 }
 
 .divider {
