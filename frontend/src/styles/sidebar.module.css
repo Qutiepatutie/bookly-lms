@@ -38,7 +38,13 @@
     margin-left: 5px;
 }
 
+.burger:hover {
+    cursor: pointer;
+}
+
 .buttons {
+    display: flex;
+    flex-direction: column;
     padding: 21px;
     flex-grow: 1;
 }
@@ -53,6 +59,12 @@
     height: 40px;
     font-size: 19.06px;
     user-select: none;
+}
+
+.settingsButton {
+    position: absolute;
+    width: 80%;
+    bottom: 10px;
     transition: all 0.3s ease;
 }
 
@@ -95,5 +107,10 @@
 
     .icons {
         margin-right: 0;
-    } 
+    }
+
+    .settingsButton {
+        bottom: 0;
+        width: 35%;
+    }
 }

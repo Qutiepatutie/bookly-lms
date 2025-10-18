@@ -55,7 +55,6 @@
     display: none;
     height: 90%;
     justify-content: center;
-    /* align-items: center; */ 
     overflow-y: scroll;
     flex-wrap: wrap;
     gap: 5rem;
@@ -91,13 +90,14 @@
 }
 
 .categoryHeader p {
-    padding-left: 1rem;
+    padding-left: 3rem;
 }
 
 .category {
     flex: 0 0 auto;
     margin-bottom: 30px;
     outline: 1px solid black;
+    border:none;
     width: 80%;
     height: 80vh;
     scroll-snap-align: start;

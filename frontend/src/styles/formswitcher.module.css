@@ -10,7 +10,7 @@
     background-color: lightgrey;
     height: 5vh;
     width: 100%;
-    gap:1%
+    gap:1%;
 }
 
 .login,
@@ -23,7 +23,6 @@
     width: 55%;
     user-select: none;
     cursor: pointer;
-    /* background-color: white; */
 }
 
 .focus {

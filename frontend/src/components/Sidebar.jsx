@@ -7,7 +7,7 @@ import library from '../assets/library.svg'
 import borrowedBooks from '../assets/borrowedBooks.svg'
 import settings from '../assets/settings.svg'
 
-export default function Sidebar({ onNavigate }){
+export default function Sidebar({ onNavigate, isOpen }){
 
     const [focused, setFocused] = useState("dashboard");
     const [extended, setExtended] = useState(false);
@@ -37,7 +37,7 @@ export default function Sidebar({ onNavigate }){
                         <p>Borrowed Books</p>
                     </div>
 
-                    <div onClick={() => {setFocused("settings"); onNavigate("settings")}} className={focused === "settings" ? styles.focused : ""}>
+                    <div onClick={() => isOpen(true)} className={styles.settingsButton}>
                         <img src={settings} className={styles.icons}/>
                         <p>Settings</p>
                     </div>
