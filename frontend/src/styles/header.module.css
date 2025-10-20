@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     margin-left: 4.5vw;
-    z-index: 2;
+    z-index: 9;
 
     display: flex;
     justify-content: space-between;
@@ -10,14 +10,17 @@
     box-sizing: border-box;
     padding: 0 50px 0 50px;
     width: 95.5vw;
-    height: 6vh;
-    background-color: #4D643A;
-
-    color: white;
+    height: 8vh;
+    outline: 1px solid #4D643A;
+    background-color: white;
 }
 
 .container p {
     margin: 0;
+}
+
+.id {
+    opacity:0.3;
 }
 
 .userContainer {

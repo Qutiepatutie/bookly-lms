@@ -14,7 +14,6 @@ export default function App(){
 
     const [currentPage, setCurrentPage] = useState("Dashboard");
     const [isAuthorized, setIsAuthorized] = useState(false);
-    const [user, setUser] = useState("");
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
@@ -24,11 +23,11 @@ export default function App(){
 
     return (
         <>
-            <Auth onLogIn={setIsAuthorized} isAuthorized={isAuthorized} setUser={setUser}/>
+            <Auth onLogIn={setIsAuthorized} isAuthorized={isAuthorized}/>
             {isAuthorized && (
                 <div className={styles.main}>
                     <Sidebar onNavigate={setCurrentPage} isOpen={setIsOpen}/>
-                    <Header currentPage={currentPage} currUser={user}/>
+                    <Header currentPage={currentPage}/>
                     <Settings isOpen={isOpen} setIsOpen={setIsOpen} onLogOut={setIsAuthorized} setCurrentPage={setCurrentPage}/>
                 
                     {currentPage === "Dashboard" && <Dashboard />}

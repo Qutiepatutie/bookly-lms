@@ -2,10 +2,10 @@ import { useState } from 'react'
 
 import styles from '../styles/sidebar.module.css'
 
-import dashboard from '../assets/dashboard.svg'
-import library from '../assets/library.svg'
-import borrowedBooks from '../assets/borrowedBooks.svg'
-import settings from '../assets/settings.svg'
+import dashboard from '../assets/sidebar/dashboard.svg'
+import library from '../assets/sidebar/library.svg'
+import borrowedBooks from '../assets/sidebar/borrowedBooks.svg'
+import settings from '../assets/sidebar/settings.svg'
 import logo from '../assets/libraSphere-logo.svg'
 
 export default function Sidebar({ onNavigate, isOpen }){

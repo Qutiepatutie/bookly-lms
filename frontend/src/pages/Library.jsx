@@ -11,6 +11,8 @@ export default function Library(){
         science: [],
     });
 
+    const [categories, setCategories] = useState(["Computer","Math","Science"]);
+
     const [booksBySearch, setBooksBySearch] = useState([]);
     const [search, setSearch] = useState("");
     const [searching, setSearching] = useState(false);
@@ -18,12 +20,16 @@ export default function Library(){
     useEffect(() => {
         async function fetchBooks() {
             try {
-                const [computer, math, science] = await Promise.all([
-                    getBooks({ category: "computer"}),
-                    getBooks({ category: "math"}),
-                    getBooks({ category: "science"}),
-                ]);
-                setBooksByCategory({ computer, math, science });
+                const books = await Promise.all(
+                    categories.map((category) => getBooks({category : category.toLowerCase()}))
+                );
+
+                const booksData = {};
+                categories.forEach((category, index) => {
+                    booksData[category.toLowerCase()] = books[index];
+                });
+
+                setBooksByCategory(booksData);
             }catch (err) {
                 console.log(err);
             }
@@ -83,17 +89,18 @@ export default function Library(){
                 </div>
 
                 <div className={`${styles.scroll} ${searching ? styles.hide : ""}`}>
-                    <div className={styles.category}>
+                    {categories.map((category,i) => (
+                     <div key={i} className={styles.category}>
                         <div className={styles.categoryHeader}>
-                            <p>Computer Science</p>
+                            <p>{category}</p>
                         </div>
                         <div className={styles.books}>
-                            {booksByCategory.computer.map((book, i) => (
-                                <div key ={i} className={styles.bookPanels}>
+                            {booksByCategory[category.toLowerCase()]?.map((book, j) => (
+                                <div key={j} className={styles.bookPanels}>
                                     {book.cover_url && (
                                         <img
                                             src={book.cover_url}
-                                            alt="Cover"
+                                            alt={book.title}
                                             className={styles.bookCover}
                                         />
                                     )}
@@ -102,49 +109,8 @@ export default function Library(){
                                 </div>
                             ))}
                         </div>
-                    </div>
-
-                    <div className={styles.category}>
-                        <div className={styles.categoryHeader}>
-                            <p>Math</p>
-                        </div>
-                        <div className={styles.books}>
-                            {booksByCategory.math.map((book, i) => (
-                                <div key ={i} className={styles.bookPanels}>
-                                    {book.cover_url && (
-                                        <img
-                                            src={book.cover_url}
-                                            alt="Cover"
-                                            className={styles.bookCover}
-                                        />
-                                    )}
-                                    <p>{book.title}</p>
-                                    <p>{book.author}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className={styles.category}>
-                        <div className={styles.categoryHeader}>
-                            <p>Science</p>
-                        </div>
-                        <div className={styles.books}>
-                            {booksByCategory.science.map((book, i) => (
-                                <div key ={i} className={styles.bookPanels}>
-                                    {book.cover_url && (
-                                        <img
-                                            src={book.cover_url}
-                                            alt="Cover"
-                                            className={styles.bookCover}
-                                        />
-                                    )}
-                                    <p>{book.title}</p>
-                                    <p>{book.author}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    </div>   
+                    ))}
                 </div>
             </div>
         </> 

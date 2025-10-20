@@ -4,7 +4,7 @@ import { login } from '../api/users.js'
 import styles from '../styles/loginform.module.css'
 import FormSwitcher from './FormSwitcher'
 
-export default function LoginForm({onSetForm, onLogIn, setUser}) {
+export default function LoginForm({onSetForm, onLogIn}) {
 
     const [emailInput, setEmailInput] = useState("");
     const [passInput, setPassInput] = useState("");
@@ -23,10 +23,10 @@ export default function LoginForm({onSetForm, onLogIn, setUser}) {
         setLoading(true);
         const data = await login(emailInput, passInput);
         setLoading(false);
+        
         if(data.status == 'success'){
             localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("user", JSON.stringify(data.user));
-            setUser(data.user);
+            localStorage.setItem("user", data.user);
 
             setInvalid(false);
             onLogIn(true);

@@ -2,9 +2,9 @@
     display:flex;
     flex-direction: column;
     margin-left: 4.5vw;
-    margin-top: 6vh;
+    margin-top: 8vh;
     width: 100vw;
-    height: 94vh;
+    height: 92vh;
     overflow: hidden;
     gap: 1rem;
 }
@@ -18,7 +18,7 @@
     height: 10vh;
     position: fixed;
     background-color: white;
-    z-index: 4;
+    z-index: 8;
 }
 
 .searchBarContainer {
@@ -70,9 +70,9 @@
 .scroll {
     display: flex;
     flex-direction: column;
-    height: 90%;
+    margin-top: 15vh;
+    height: 100vh;
     align-items: center;
-    padding-top: 15vh;
     overflow-x: scroll;
     scroll-behavior: smooth;
     gap: 5rem;
@@ -84,11 +84,11 @@
 
 .categoryHeader {
     display: flex;
-    height: 10%;
+    height: 5vh;
     width: 100%;
     justify-content: left;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     background-color: #4D643A;
 }
 
@@ -107,9 +107,9 @@
 
 .books {
     display: flex;
-    height: 90%;
-    justify-content: left;
-    align-items: center;
+    height: 35vh;
+    justify-content: flex-start;
+    align-items: flex-start;
     overflow-x: scroll;
     overflow-y: hidden;
     box-sizing: border-box;
@@ -126,7 +126,7 @@
     box-sizing: border-box;
     padding: 10px;
     height: 290px;
-    min-width: 200px;
+    width: 200px;
     font-size: 0.8rem;
     border-radius: 10px;
 }
@@ -136,14 +136,14 @@
 }
 
 .bookPanels img {
-    width: 65%;
-    height: 70%;
+    width: 120px;
+    height: 190px;
     object-fit: cover;
     border-radius: 6px;
 }
 
 .bookPanels p {
-    width: 100%;
+    width: 180px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

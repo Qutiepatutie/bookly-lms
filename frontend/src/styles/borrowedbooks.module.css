@@ -1,0 +1,53 @@
+.borrowedBooks {
+    margin-left: 4.5vw;
+    margin-top: 6vh;
+    width: 100vw;
+    height: 94vh;
+    padding: 80px 100px 10px 100px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.borrowedBooks p {
+    margin: 0;
+}
+
+.upper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 13vh;
+}
+
+.infoPanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 23%;
+    height: 100%;
+    outline: 2px solid rgba(128, 128, 128, 0.5);
+}
+
+.icon {
+    width: 27px;
+    height: 27px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.books {
+    width: 100%;
+    height: 100%;
+    outline: 2px solid rgba(128, 128, 128, 0.5);
+}
