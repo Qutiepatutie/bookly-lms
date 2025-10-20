@@ -4,7 +4,7 @@ import { login } from '../api/users.js'
 import styles from '../styles/loginform.module.css'
 import FormSwitcher from './FormSwitcher'
 
-export default function LoginForm({onSetForm, onLogIn}) {
+export default function LoginForm({onSetForm, onLogIn, setUser}) {
 
     const [emailInput, setEmailInput] = useState("");
     const [passInput, setPassInput] = useState("");
@@ -26,7 +26,8 @@ export default function LoginForm({onSetForm, onLogIn}) {
         if(data.status == 'success'){
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("user", JSON.stringify(data.user));
-            
+            setUser(data.user);
+
             setInvalid(false);
             onLogIn(true);
             setEmailInput("");
@@ -42,7 +43,7 @@ export default function LoginForm({onSetForm, onLogIn}) {
         <>
             <div className={styles.container}>
                 <div className={styles.header}> {/*Header*/}
-                   LibraSphere
+                   <p>LibraSphere</p>
                 </div>
 
                 <FormSwitcher onSetForm={onSetForm} isFocused = "login"/>

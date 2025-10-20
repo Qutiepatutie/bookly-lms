@@ -8,8 +8,12 @@
     width: 4.5vw;
     border-right: 1px solid #4D643A;
     container-type: inline-size;
-    transition: width 0.3s ease;
+    transition: width 0.2s ease;
     background-color: white;
+}
+
+.sidebar:hover {
+    width: 16vw;
 }
 
 .extended {
@@ -26,20 +30,17 @@
     display:flex;
     justify-content: left;
     align-items: center;
-    padding-left: 25px;
+    padding-left: 18px;
     color: #4D643A;
     user-select: none;
     height: 10vh
 }
 
-.burger {
-    font-size: 2rem;
+.logo {
+    width: 50px;
+    height: 50px;
     margin-right: 10px;
-    margin-left: 5px;
-}
-
-.burger:hover {
-    cursor: pointer;
+    user-select: none;
 }
 
 .buttons {
@@ -64,8 +65,7 @@
 .settingsButton {
     position: absolute;
     width: 80%;
-    bottom: 10px;
-    transition: all 0.3s ease;
+    bottom: 0;
 }
 
 .buttons div:not(.focused):hover {
@@ -92,7 +92,6 @@
     opacity: 0.8;
     color: grey;
     text-align: center;
-    padding: 10px;
 }
 
 @container (max-width: 14vw) {
@@ -107,10 +106,5 @@
 
     .icons {
         margin-right: 0;
-    }
-
-    .settingsButton {
-        bottom: 0;
-        width: 35%;
     }
 }

@@ -1,0 +1,32 @@
+.container {
+    position: fixed;
+    top: 0;
+    margin-left: 4.5vw;
+    z-index: 2;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 50px 0 50px;
+    width: 95.5vw;
+    height: 6vh;
+    background-color: #4D643A;
+
+    color: white;
+}
+
+.container p {
+    margin: 0;
+}
+
+.userContainer {
+    display: flex;
+}
+
+.icon {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+    border-radius: 50px;
+}

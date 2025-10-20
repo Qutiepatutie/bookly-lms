@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import styles from './styles/app.module.css'
 import Sidebar from './components/Sidebar.jsx'
+import Header from './components/Header.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Library from './pages/Library.jsx'
 import BorrowedBooks from './pages/BorrowedBooks.jsx'
@@ -11,8 +12,9 @@ import Auth from './pages/Auth.jsx'
 
 export default function App(){
 
-    const [currentPage, setCurrentPage] = useState("dashboard");
+    const [currentPage, setCurrentPage] = useState("Dashboard");
     const [isAuthorized, setIsAuthorized] = useState(false);
+    const [user, setUser] = useState("");
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
@@ -22,15 +24,16 @@ export default function App(){
 
     return (
         <>
-            <Auth onLogIn={setIsAuthorized} isAuthorized={isAuthorized}/>
+            <Auth onLogIn={setIsAuthorized} isAuthorized={isAuthorized} setUser={setUser}/>
             {isAuthorized && (
                 <div className={styles.main}>
                     <Sidebar onNavigate={setCurrentPage} isOpen={setIsOpen}/>
+                    <Header currentPage={currentPage} currUser={user}/>
                     <Settings isOpen={isOpen} setIsOpen={setIsOpen} onLogOut={setIsAuthorized} setCurrentPage={setCurrentPage}/>
                 
-                    {currentPage === "dashboard" && <Dashboard />}
-                    {currentPage === "library" && <Library />}
-                    {currentPage === "borrowedBooks" && <BorrowedBooks />}
+                    {currentPage === "Dashboard" && <Dashboard />}
+                    {currentPage === "Library" && <Library />}
+                    {currentPage === "Borrowed Books" && <BorrowedBooks />}
                 </div>
             )}
             

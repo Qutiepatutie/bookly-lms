@@ -1,6 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
+    gap: 10px;
     height: 50vh;
     width: 25vw;
     border-radius: 10px;
@@ -11,13 +12,11 @@
 
 .header {
     display: flex;
-    align-items: left;
-    height: 10%;
+    align-items: center;
+    justify-content: center;
     font-size: 1.5rem;
-    /* background-color: gray; */
-    /* padding-left: 10%; */
+    height: 2rem;
 }
-
 .switcher {
     display: flex;
     align-items: center;

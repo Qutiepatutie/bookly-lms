@@ -2,21 +2,20 @@
     display: flex;
     flex-direction: column;
     width: 30vw;
-    height: 85vh;
-    padding: 25px 35px 0 35px;
+    height: 75vh;
+    padding: 35px;
     border-radius: 10px;
     box-sizing: border-box;
-    gap: 2%;
+    gap: 15px;
     background-color: white;
 }
 
 .header {
     display: flex;
-    align-items: left;
-    height: 6%;
+    align-items: center;
+    justify-content: center;
+    height: 1rem;
     font-size: 1.5rem;
-    /* background-color: gray; */
-    /* padding-left: 10%; */
 }
 
 .switcher {
@@ -24,7 +23,6 @@
     align-items: center;
     justify-content: center;
     align-self: center;
-    /* margin-top: 10px; */
     padding: 3px;
     box-sizing: border-box;
     border-radius: 15px;
@@ -49,7 +47,6 @@
     width: 55%;
     user-select: none;
     cursor: pointer;
-    /* background-color: white; */
 }
 
 .formContainer {
@@ -62,28 +59,25 @@
 .form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     height: auto;
-    gap: 3px;
-    /* background-color: green; */
+    gap: 10px;
 }
 
-.form label {
-    align-self: flex-start;
-    margin-left: 10%;
-    margin-bottom: 5px;
+.container label {
+    width: 15vw;
+    text-align: right;
 }
 
-/* .form div {
+.form div {
     display: flex;
     justify-content: right;
-} */
+    align-items: center;
+}
 
 .form input {
-    width: 80%;
-    height: 2.5vh;
+    width: 100%;
+    height: 4vh;
     border-radius: 5px;
     border: none;
     margin-left: 5px;
@@ -96,21 +90,20 @@
     outline: 2px solid #4D643A;
 }
 
-.sexChoice {
+.sexContainer {
     display: flex;
     align-items: center;
-    height: 3.5vh;
+    height: 4vh;
     width: 100%;
     justify-content: center;
-    /* background-color: blue; */
 }
 
-.sexContainer {
+.sexChoice {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 50%;
+    width: 100%;
     border-radius: 8px;
     padding: 1px;
     box-sizing: border-box;
@@ -129,8 +122,6 @@
     border-radius: 8px;
     user-select: none;
     cursor: pointer;
-
-    /* background-color: darkgray; */
 }
 
 .maleFocus {
@@ -142,6 +133,7 @@
 }
 
 .button {
+    margin-top: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
