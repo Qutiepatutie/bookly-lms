@@ -4,7 +4,7 @@ import { login } from '../api/users.js'
 import styles from '../styles/loginform.module.css'
 import FormSwitcher from './FormSwitcher'
 
-export default function LoginForm({onSetForm, onLogIn}) {
+export default function LoginForm({onSetForm, onLogIn, role}) {
 
     const [emailInput, setEmailInput] = useState("");
     const [passInput, setPassInput] = useState("");
@@ -27,6 +27,8 @@ export default function LoginForm({onSetForm, onLogIn}) {
         if(data.status == 'success'){
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("user", data.user);
+            localStorage.setItem("student_number", data.student_number);
+            localStorage.setItem("role", data.role);
 
             setInvalid(false);
             onLogIn(true);
@@ -48,8 +50,8 @@ export default function LoginForm({onSetForm, onLogIn}) {
 
                 <FormSwitcher onSetForm={onSetForm} isFocused = "login"/>
 
-                <div className={(!invalid) ? styles.hidden : ""}>
-                    <p className={styles.message}>Invalid Email/Password</p>
+                <div className={(!invalid) ? styles.hidden : styles.message}>
+                    <p>Invalid Email/Password</p>
                 </div>
                 <form className={styles.form} onSubmit={(e) => {e.preventDefault(); handleLogIn;}}> {/*Forms*/}
                     <label>Email</label>
