@@ -96,7 +96,7 @@
     justify-content: left;
     align-items: center;
     font-size: 1.3rem;
-    background-color: #4D643A;
+    background-color: var(--color);
     color: white;
     border-radius: 5px 5px 0px 0px;
 }
@@ -111,7 +111,6 @@
     margin-bottom: 30px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 0px 0px 5px 5px;
-    /* outline: 1px solid rgb(0, 0, 0); */
     border:none;
     width: 80%;
     height: 40vh;
@@ -125,7 +124,7 @@
         background-color: #ededed;
     }::-webkit-scrollbar-thumb
     {
-        background-color: #4D643A;
+        background-color: var(--color);
         border-radius: 15px;
     }
 

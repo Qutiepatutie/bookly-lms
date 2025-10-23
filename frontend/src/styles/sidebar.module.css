@@ -24,8 +24,8 @@
 .divider {
     border: none;
     border-top: 1.5px solid;
-    border-color: #4D643A;
-    outline: #4D643A;
+    border-color: var(--color);
+    outline: var(--color);
     margin: 0;
 }
 
@@ -34,7 +34,7 @@
     justify-content: left;
     align-items: center;
     padding-left: 13px;
-    color: #4D643A;
+    color: var(--color);
     user-select: none;
     height: 8vh
 }
@@ -77,7 +77,7 @@
 }
 
 .focused {
-    background-color:#4D643A;
+    background-color: var(--color);
     color: white;
 }
 

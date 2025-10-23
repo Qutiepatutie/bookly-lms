@@ -6,9 +6,10 @@ import dashboard from '../assets/sidebar/dashboard.svg'
 import library from '../assets/sidebar/library.svg'
 import borrowedBooks from '../assets/sidebar/borrowedBooks.svg'
 import settings from '../assets/sidebar/settings.svg'
-import logo from '../assets/libraSphere-logo.svg'
+import greenLogo from '../assets/green-libraSphere-logo.svg'
+import redLogo from '../assets/red-libraSphere-logo.svg'
 
-export default function Sidebar({ onNavigate, isOpen }){
+export default function Sidebar({ onNavigate, isOpen, role }){
 
     const [focused, setFocused] = useState("Dashboard");
     const [extended, setExtended] = useState(false);
@@ -17,7 +18,7 @@ export default function Sidebar({ onNavigate, isOpen }){
         <>
             <div className={`${styles.sidebar} ${extended ? styles.extended : ""}`}>
                 <div className={styles.header}>
-                    <img src={logo} className={styles.logo}/>
+                    <img src={role==="admin" ? redLogo : greenLogo} className={styles.logo}/>
                     <h1>LibraSphere</h1>
                 </div>
                 <hr className={styles.divider} />

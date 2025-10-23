@@ -6,6 +6,7 @@ export default function Settings({isOpen, setIsOpen, onLogOut, setCurrentPage}){
     const handleLogOut = () => {
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("user");
+        localStorage.removeItem("role");
         onLogOut(false);
         setIsOpen(false);
         setCurrentPage("dashboard");

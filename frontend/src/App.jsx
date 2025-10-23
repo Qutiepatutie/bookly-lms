@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import './styles/theme.css'
+
 import styles from './styles/app.module.css'
 import Sidebar from './components/Sidebar.jsx'
 import Header from './components/Header.jsx'
@@ -29,10 +31,10 @@ export default function App(){
 
     return (
         <>
-            <Auth onLogIn={setIsAuthorized} isAuthorized={isAuthorized}/>
+            <Auth onLogIn={setIsAuthorized} isAuthorized={isAuthorized} setRole={setRole}/>
             {isAuthorized &&
-                <div className={styles.main}>
-                    <Sidebar onNavigate={setCurrentPage} isOpen={setIsOpen}/>
+                <div className={`${styles.main} ${role === "admin" ? "admin" : ""}`}>
+                    <Sidebar onNavigate={setCurrentPage} isOpen={setIsOpen} role={role}/>
                     <Header currentPage={currentPage}/>
                     <Settings isOpen={isOpen} setIsOpen={setIsOpen} onLogOut={setIsAuthorized} setCurrentPage={setCurrentPage}/>
 

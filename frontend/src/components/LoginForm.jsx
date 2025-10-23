@@ -4,7 +4,7 @@ import { login } from '../api/users.js'
 import styles from '../styles/loginform.module.css'
 import FormSwitcher from './FormSwitcher'
 
-export default function LoginForm({onSetForm, onLogIn, role}) {
+export default function LoginForm({onSetForm, onLogIn, setRole}) {
 
     const [emailInput, setEmailInput] = useState("");
     const [passInput, setPassInput] = useState("");
@@ -31,6 +31,7 @@ export default function LoginForm({onSetForm, onLogIn, role}) {
             localStorage.setItem("role", data.role);
 
             setInvalid(false);
+            setRole(localStorage.getItem("role"));
             onLogIn(true);
             setEmailInput("");
             setPassInput("");
@@ -79,7 +80,7 @@ export default function LoginForm({onSetForm, onLogIn, role}) {
                         <div className={styles.forgotPass}><u>Forgot Password?</u></div>
 
                         <button type ="submit" onClick={handleLogIn} className={styles.loginButton}>
-                            {(loading) ? "Loggin in..." : "Login"}
+                            {(loading) ? "Logging in..." : "Login"}
                         </button>
                     </div>
                 </form>
