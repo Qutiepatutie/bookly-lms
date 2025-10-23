@@ -1,7 +1,7 @@
 .library {
     display:flex;
     flex-direction: column;
-    margin-left: 4.5vw;
+    margin-left: 3.3vw;
     margin-top: 8vh;
     width: 100vw;
     height: 92vh;
@@ -23,10 +23,11 @@
 
 .searchBarContainer {
     display: flex;
-    height: 35%;
+    height: 45%;
     width: 50%;
     border-radius: 10px;
-    border: 0.5px solid #4D643A;
+    border: 0.5px solid;
+    border-color: #ededed;
 }
 
 .searchBar{
@@ -36,6 +37,7 @@
     padding-left: 10px;
     font-size: 1rem;
     border-radius: 10px 0px 0px 10px;
+    background-color: #ededed;
 }
 
 .searchBar:focus {
@@ -48,9 +50,10 @@
     align-items: center;
     width: 10%;
     height: 100%;
-    background-color: white;
+    background-color: #ededed;
     border-radius: 0px 10px 10px 0px;
-    border-left: 1px solid
+    border-left: 2px solid;
+    border-color: #b8b8b8;
 }
 
 .searchScroll {
@@ -76,6 +79,10 @@
     overflow-x: scroll;
     scroll-behavior: smooth;
     gap: 5rem;
+    box-shadow: 0px 189px 25px -200px rgba(186,186,186,1) inset;
+    -webkit-box-shadow: 0px 189px 25px -200px rgba(186,186,186,1) inset;
+    -moz-box-shadow: 0px 189px 25px -200px rgba(186,186,186,1) inset;
+    overflow-x: hidden;
 }
 
 .hide {
@@ -90,6 +97,8 @@
     align-items: center;
     font-size: 1.3rem;
     background-color: #4D643A;
+    color: white;
+    border-radius: 5px 5px 0px 0px;
 }
 
 .categoryHeader p {
@@ -97,13 +106,29 @@
 }
 
 .category {
+    margin-top: 6vh;
     flex: 0 0 auto;
     margin-bottom: 30px;
-    outline: 1px solid black;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 0px 0px 5px 5px;
+    /* outline: 1px solid rgb(0, 0, 0); */
     border:none;
     width: 80%;
     height: 40vh;
 }
+    ::-webkit-scrollbar
+    {
+        height: 10px;
+        width: 10px
+    }::-webkit-scrollbar-track
+    {
+        background-color: #ededed;
+    }::-webkit-scrollbar-thumb
+    {
+        background-color: #4D643A;
+        border-radius: 15px;
+    }
+
 
 .books {
     display: flex;
@@ -132,7 +157,7 @@
 }
 
 .bookPanels:hover {
-    background-color: #4d643a;
+    background-color: #ededed;
 }
 
 .bookPanels img {

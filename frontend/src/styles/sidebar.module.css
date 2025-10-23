@@ -5,8 +5,9 @@
     display:flex;
     flex-direction: column;
     height: 100vh;
-    width: 4.5vw;
-    border-right: 1px solid #4D643A;
+    width: 3.5vw;
+    border-right: 1.5px solid #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     container-type: inline-size;
     transition: width 0.2s ease;
     background-color: white;
@@ -22,7 +23,9 @@
 
 .divider {
     border: none;
-    border-top: 1px solid #4D643A;
+    border-top: 1.5px solid;
+    border-color: #4D643A;
+    outline: #4D643A;
     margin: 0;
 }
 
@@ -30,15 +33,15 @@
     display:flex;
     justify-content: left;
     align-items: center;
-    padding-left: 18px;
+    padding-left: 13px;
     color: #4D643A;
     user-select: none;
     height: 8vh
 }
 
 .logo {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     margin-right: 10px;
     user-select: none;
 }
@@ -46,7 +49,7 @@
 .buttons {
     display: flex;
     flex-direction: column;
-    padding: 21px;
+    padding: 10px;
     flex-grow: 1;
 }
 
@@ -69,7 +72,8 @@
 }
 
 .buttons div:not(.focused):hover {
-    outline: 2px solid #4D643A;
+    background-color: #ededed;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 .focused {
