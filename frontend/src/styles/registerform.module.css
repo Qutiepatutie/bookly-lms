@@ -8,6 +8,7 @@
     box-sizing: border-box;
     gap: 15px;
     background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .header {
@@ -26,7 +27,7 @@
     padding: 3px;
     box-sizing: border-box;
     border-radius: 15px;
-    background-color: lightgrey;
+    background-color: #ededed;
     height: 5vh;
     width: 80%;
     gap:1%
@@ -83,7 +84,8 @@
     margin-left: 5px;
     padding-left: 5px;
     box-sizing: border-box;
-    outline: 1px solid #4D643A;
+    background-color: #ededed;
+    /* outline: 1px solid #4D643A; */
 }
 
 input.empty, select.empty {
@@ -113,7 +115,7 @@ input.empty, select.empty {
     box-sizing: border-box;
     gap: 3px;
     margin-left: 10px;
-    background-color: lightgray;
+    background-color: #ededed;
 }
 
 .male,
@@ -128,12 +130,10 @@ input.empty, select.empty {
     cursor: pointer;
 }
 
-.maleFocus {
-    background-color: #2986cc;
-}
-
+.maleFocus,
 .femaleFocus {
-    background-color: #c90076;
+    background-color: #4D643A;
+    color: white;
 }
 
 .button {

@@ -8,6 +8,7 @@
     padding: 25px 35px 0 35px;
     box-sizing: border-box;
     background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .header {
@@ -26,7 +27,7 @@
     padding: 3px;
     box-sizing: border-box;
     border-radius: 15px;
-    background-color: lightgrey;
+    background-color: #ededed;
     height: 5vh;
     width: 100%;
     gap:1%
@@ -75,10 +76,11 @@
     height: 4vh;
     border-radius: 7px;
     border:none;
-    outline: 1px solid #4D643A;
+    /* outline: 1px solid #4D643A; */
     font-size: 1rem;
     padding-left: 3%;
     box-sizing: border-box;
+    background-color: #ededed;
 }
 
 input.empty {
@@ -106,7 +108,7 @@ input.empty {
 }
 
 .forgotPass:hover {
-    font-weight: bold;
+    color: #4D643A;
     cursor: pointer;
 }
 
@@ -123,6 +125,6 @@ input.empty {
 }
 
 .loginButton:hover {
-    transform: scale(1.01);
-    transition: transform 0.2s ease;
+    transform: scale(1.001);
+    transition: transform 0.4s ease;
 }
