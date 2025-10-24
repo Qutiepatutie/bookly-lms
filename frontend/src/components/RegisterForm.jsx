@@ -174,7 +174,7 @@ export default function RegisterForm({onSetForm}) {
                     {currentForm === "Second" && (
                         <>
                             <div className={styles.next}>
-                                <button className={styles.back} onClick={() => setCurrentForm("First")}>Back</button>
+                                <button onClick={() => setCurrentForm("First")}>Back</button>
                                 <button onClick={() => setCurrentForm("Third")}>Next</button>
                             </div>
                         </>
@@ -182,7 +182,7 @@ export default function RegisterForm({onSetForm}) {
                     {currentForm === "Third" && (
                         <>
                             <div className={styles.next}>
-                                <button className={styles.back} onClick={() => setCurrentForm("Second")}>Back</button>
+                                <button onClick={() => setCurrentForm("Second")}>Back</button>
                                 <button>Register</button>
                             </div>
                         </>

@@ -8,8 +8,8 @@
     box-sizing: border-box;
     border-radius: 15px;
     background-color: #ededed;
-    height: 50px;
-    width: 300px;
+    min-height: 50px;
+    width: 100%;
     gap:1%;
 }
 

@@ -80,20 +80,14 @@ input.empty {
 }
 
 .next {
+    margin-top: auto;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    /* background-color: grey; */
 }
 
 .next button {
-    width: 50%;
-}
-
-.next .back {
-    background-color: #ededed;
-    border: 1px solid #ccc;
-    color:black
+    width: 49%;
 }
 
 .popupContainer {
