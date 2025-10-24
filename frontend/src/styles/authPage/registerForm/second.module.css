@@ -36,3 +36,7 @@
     background-color: #4D643A;
     color: white;
 }
+select.empty,
+input.empty {
+    outline: 2px solid red;
+}

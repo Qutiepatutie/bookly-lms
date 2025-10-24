@@ -5,7 +5,7 @@ import styles from '../styles/formswitcher.module.css'
 export default function FormSwitcher({onSetForm, isFocused}) {
 
     return (
-        <div className={styles.switcher}> {/*Switcher*/}
+        <div className={styles.switcher}>
             <div
                 onClick={() => {onSetForm("login")}}
                 className={`${styles.login} ${isFocused == "login" ? styles.focus : ""}`}>

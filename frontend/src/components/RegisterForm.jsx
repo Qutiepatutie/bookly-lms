@@ -41,35 +41,23 @@ export default function RegisterForm({onSetForm}) {
         confirm_password: "",
         role: "student",
     });
+    const handleChange = (e) => {
+        setRegisterData({ ...registerData, [e.target.name]: e.target.value });
+        console.log(e.target.value);
+    }
 
     const setFields = () =>{
-        setEmptyFName(!registerData.first_name ? true : false);
-        setEmptyLName(!registerData.last_name ? true : false);
-        setEmptyStudNumber(!registerData.student_number ? true : false);
-        setEmptyProgram(!registerData.program ? true : false);
         setEmptyEmail(!registerData.email ? true : false);
         setEmptyPassword(!registerData.password ? true : false);
         setEmptyConfirmPassword(!registerData.confirm_password ? true : false);
     }
 
-    const handleChange = (e) => {
-        setRegisterData({ ...registerData, [e.target.name]: e.target.value });
-    }
-
     const handleRegister = async () => {
         setFields();
-
         setConfirmPassError(false);
         setInvalidEmailError(false);
-        
-        if(!registerData.first_name ||
-            !registerData.last_name ||
-            !registerData.student_number ||
-            !registerData.program ||
-            !registerData.email ||
-            !registerData.password ||
-            !registerData.confirm_password){
-                
+
+        if(!registerData.email || !registerData.password || !registerData.confirm_password){
             setFields();
             return;
         }
@@ -127,22 +115,44 @@ export default function RegisterForm({onSetForm}) {
 
     const handleConfirm = () => {
         setShowPopUp(false);
-        registerData.first_name = "";
-        registerData.middle_name = "";
-        registerData.last_name = "";
-        registerData.sex = "male";
-        registerData.student_number = "";
-        registerData.program = "";
-        registerData.email = "";
-        registerData.password = "";
-        registerData.confirm_password = "";
-        registerData.role = "student";
+        setCurrentForm("First");
+        setRegisterData({
+            first_name: "",
+            middle_name: "",
+            last_name: "",
+            sex: "male",
+            student_number: "",
+            program: "",
+            email: "",
+            password: "",
+            confirm_password: "",
+            role: "student",
+        })
     }
 
-    const handleNext = () => {
-        if(!registerData.first_name || !registerData.last_name){
-            setFields();
-            return;
+    const handleNext = (nextForm) => {
+        switch(currentForm){
+            case "First":
+                if(!registerData.first_name || !registerData.last_name){
+                    setEmptyFName(!registerData.first_name ? true : false);
+                    setEmptyLName(!registerData.last_name ? true : false);
+                    return;
+                }
+                setEmptyFName(!registerData.first_name ? true : false);
+                setEmptyLName(!registerData.last_name ? true : false);
+                setCurrentForm(nextForm);
+                break;
+
+            case "Second":
+                if(!registerData.student_number || !registerData.program){
+                    setEmptyProgram(!registerData.program ? true : false);
+                    setEmptyStudNumber(!registerData.student_number ? true : false);
+                    return;
+                }
+                setEmptyProgram(!registerData.program ? true : false);
+                setEmptyStudNumber(!registerData.student_number ? true : false);
+                setCurrentForm(nextForm);
+                break;
         }
     }
 
@@ -160,9 +170,31 @@ export default function RegisterForm({onSetForm}) {
                 <FormSwitcher onSetForm={onSetForm} isFocused = "register"/>
                 <RegisterProgress currentForm={currentForm}/>
                 <div className={styles.formContainer}>
-                    {currentForm === "First" && <First handleChange={handleChange} setRegisterData={setRegisterData} registerData={registerData}/>}
-                    {currentForm === "Second" && <Second sex={sex} setSex={setSex} setRegisterData={setRegisterData} registerData={registerData}/>}
-                    {currentForm === "Third" && <Third /> }
+                    {currentForm === "First" && <First  
+                                                    handleChange={handleChange}
+                                                    registerData={registerData}
+                                                    emptyFName={emptyFName}
+                                                    emptyLName={emptyLName}
+                                                />
+                    }
+                    {currentForm === "Second" && <Second
+                                                    sex={sex}
+                                                    setSex={setSex}
+                                                    handleChange={handleChange}
+                                                    setRegisterData={setRegisterData}
+                                                    registerData={registerData}
+                                                    emptyProgram={emptyProgram}
+                                                    emptyStudNumber={emptyStudNumber}
+                                                />
+                    }
+                    {currentForm === "Third" && <Third 
+                                                    handleChange={handleChange}
+                                                    registerData={registerData}
+                                                    emptyEmail={emptyEmail}
+                                                    emptyPassword={emptyPassword}
+                                                    emptyConfirmPassword={emptyConfirmPassword}
+                                                />
+                    }
                 </div>
                 
                 <div className={styles.button}>
@@ -170,12 +202,12 @@ export default function RegisterForm({onSetForm}) {
                         {confirmPassError ? "Passwords Must Match!" : ""}
                         {invalidEmailError ? "Invalid Email" : ""}
                     </p>
-                    {currentForm === "First" && <button onClick={() => setCurrentForm("Second")}>Next</button>}
+                    {currentForm === "First" && <button onClick={() => handleNext("Second")}>Next</button>}
                     {currentForm === "Second" && (
                         <>
                             <div className={styles.next}>
                                 <button onClick={() => setCurrentForm("First")}>Back</button>
-                                <button onClick={() => setCurrentForm("Third")}>Next</button>
+                                <button onClick={() => handleNext("Third")}>Next</button>
                             </div>
                         </>
                     )}
@@ -183,7 +215,9 @@ export default function RegisterForm({onSetForm}) {
                         <>
                             <div className={styles.next}>
                                 <button onClick={() => setCurrentForm("Second")}>Back</button>
-                                <button>Register</button>
+                                <button onClick={handleRegister} disabled={loading}>
+                                    {loading ? "Processing..." : "Register"}
+                                </button>
                             </div>
                         </>
                     )}

@@ -39,6 +39,8 @@ export default function LoginForm({onSetForm, onLogIn, setRole}) {
         }else if(data.status == 'failed'){
             console.log(data.status);
             setInvalid(true);
+        }else if(data.status = 'error'){
+            
         }
     }
 
@@ -48,7 +50,7 @@ export default function LoginForm({onSetForm, onLogIn, setRole}) {
 
                 <FormSwitcher onSetForm={onSetForm} isFocused = "login"/>
 
-                <form className={styles.form} onSubmit={(e) => {e.preventDefault(); handleLogIn;}}> {/*Forms*/}
+                <form className={styles.form} onSubmit={(e) => {e.preventDefault(); handleLogIn;}}>
                     <label>Email</label>
                        <input className={(emptyEmail) ? styles.empty : ""}
                             type="text"
@@ -70,10 +72,10 @@ export default function LoginForm({onSetForm, onLogIn, setRole}) {
                                 setEmptyPass(false);
                             }}
                         /> 
-                    <div className={(!invalid) ? styles.hidden : styles.message}>
+                    <div className={invalid ? styles.message : styles.hidden}>
                         <p>Invalid Email/Password</p>
                     </div>
-                    <div className={styles.button}> {/*Button*/}
+                    <div className={styles.button}>
                         <div className={styles.forgotPass}><u>Forgot Password?</u></div>
 
                         <button type ="submit" onClick={handleLogIn} className={styles.loginButton}>

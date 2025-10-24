@@ -21,7 +21,6 @@ p {
     height: 250px;
     width: 100%;
     gap:5px;
-   /*  background-color: gray; */
 }
 
 .formContainer input, select {
@@ -57,7 +56,6 @@ input.empty {
     align-items: center;
     height: 70px;
     gap:5px;
-    /* background-color: green; */
 }
 
 .button u:hover {

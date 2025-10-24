@@ -1,6 +1,6 @@
 import styles from '../../styles/authPage/registerForm/second.module.css'
 
-export default function Second({ sex, setSex, setRegisterData, registerData }) {
+export default function Second({ sex, setSex, handleChange, setRegisterData, registerData, emptyProgram, emptyStudNumber }) {
     return (
         <>
             <div className={styles.sexContainer}>
@@ -26,7 +26,7 @@ export default function Second({ sex, setSex, setRegisterData, registerData }) {
             </div>
 
             <label>Program</label>
-            <select name="program" value={registerData.program}>
+            <select name="program" value={registerData.program} onChange={handleChange} className={emptyProgram ? styles.empty : ""}>
                 <option value="" disabled hidden></option>
                 <option value="BSCS">BSCS</option>
                 <option value="BSN">BSN</option>
@@ -36,7 +36,13 @@ export default function Second({ sex, setSex, setRegisterData, registerData }) {
             </select>
 
             <label>Student Number</label>
-            <input type="text"></input>
+            <input
+                type="text"
+                name="student_number"
+                value={registerData.student_number}
+                onChange={handleChange}
+                className={emptyStudNumber ? styles.empty : ""}
+            />
         </>
     )
 }

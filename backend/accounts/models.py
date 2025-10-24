@@ -3,25 +3,32 @@ from django.conf import settings
 
 #Manages user profiles linked to the built-in User model
 class Gender(models.TextChoices):
-    MALE = 'Male', 'male'
-    FEMALE = 'Female', 'female'
+    MALE = 'male', 'Male'
+    FEMALE = 'female', 'Female'
 
 class Role(models.TextChoices):
-    USER = 'User', 'user'
-    ADMIN = 'Admin', 'admin'
-    SUPER_ADMIN = 'Super Admin', 'super_admin'
+    STUDENT = 'student', 'Student'
+    FACULTY = 'faculty', 'Faculty'
+    ADMIN = 'admin', 'Admin'
 
-class Profile(models.Model):
-    #Linking Profile to built-in User model
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+class UserLogin(models.Model):
+    id = models.AutoField(primary_key=True)
+    email = models.CharField(max_length=100, unique=True)
+    password = models.CharField(max_length=128)
+    role = models.CharField(max_length=10, choices=Role.choices, default=Role.STUDENT)
+
+    class Meta:
+        db_table = 'user_login'
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(UserLogin, on_delete=models.CASCADE, related_name='profile')
     
+    first_name = models.CharField(max_length=100, blank=True)
     middle_name = models.CharField(max_length=100, blank=True, null=True)
-    suffix = models.CharField(max_length=20, blank=True, null=True)
-    gender = models.CharField(max_length=10, choices=Gender.choices, blank=True, null=True)
+    last_name = models.CharField(max_length=100, blank=True)
+    sex = models.CharField(max_length=10, choices=Gender.choices, blank=True, null=True)
     student_number = models.CharField(max_length=13, unique=True)
-    course = models.CharField(max_length=100, blank=True, null=True)
-    role = models.CharField(max_length=20, choices=Role.choices, default=Role.USER)
+    program = models.CharField(max_length=100, blank=True, null=True)
 
-    def __str__(self):
-        #Shows user's email in admin panel
-        return f"{self.user.email}"
+    class Meta:
+        db_table = 'user_profile'

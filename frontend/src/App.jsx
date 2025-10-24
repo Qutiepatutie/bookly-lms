@@ -25,7 +25,7 @@ export default function App(){
         const loggedIn = localStorage.getItem("isLoggedIn") === "true";
         if(loggedIn){
             setIsAuthorized(true);
-            setRole(localStorage.getItem("role"));
+            /* setRole(localStorage.getItem("role")); */
         }
     }, []);
 
