@@ -30,11 +30,12 @@ export default function Library(){
                 });
 
                 setBooksByCategory(booksData);
+                booksData.computer.forEach((e) => console.log(e.work_key)); //make function for fetching book datas
             }catch (err) {
                 console.log(err);
             }
         }
-
+        
         fetchBooks();
     }, []);
 

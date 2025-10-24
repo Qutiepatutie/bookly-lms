@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import styles from '../styles/auth.module.css'
+import styles from '../styles/authPage/auth.module.css'
 
 import LoginForm from '../components/LoginForm.jsx'
 import RegisterForm from '../components/RegisterForm.jsx';

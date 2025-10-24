@@ -20,6 +20,7 @@ def getBooks(request):
 
     for work in resp.json().get(data_key, []):
         title = work.get("title")
+        workKey = work.get("key").split("/")[2]
 
         if data_key =="docs":
             authors = [{"name" : n} for n in work.get("author_name", [])]
@@ -37,7 +38,8 @@ def getBooks(request):
             books.append({
                 "title" : title,
                 "author" : author,
-                "cover_url" : cover_url
+                "cover_url" : cover_url,
+                "work_key" : workKey
             })
 
     return JsonResponse(books, safe=False)

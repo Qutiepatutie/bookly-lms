@@ -17,11 +17,12 @@ def get_users(request):
         # Optional: query your Supabase table
         user_exists = UserLogin.objects.filter(email=email, password=password).exists()
 
-        first_name = UserInfos.objects.get(user__email=email).first_name
-        student_number = UserInfos.objects.get(user__email=email).student_number
-        role = UserLogin.objects.get(email=email).role
-
         if user_exists:
+            
+            first_name = UserInfos.objects.get(user__email=email).first_name
+            student_number = UserInfos.objects.get(user__email=email).student_number
+            role = UserLogin.objects.get(email=email).role
+
             return JsonResponse({'status': 'success', 'user' : first_name, 'student_number' : student_number, 'role': role})
         else:
             return JsonResponse({'status': 'failed', 'message': 'Invalid credentials'})
