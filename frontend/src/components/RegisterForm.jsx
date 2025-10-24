@@ -1,7 +1,12 @@
-import { useState,useEffect } from 'react'
+import { useState,useEffect } from 'react';
 
-import styles from '../styles/registerform.module.css'
+import styles from '../styles/authPage/registerform.module.css';
 import FormSwitcher from './FormSwitcher';
+import RegisterProgress from './RegisterProgress.jsx';
+
+import First from './registerForms/First.jsx';
+import Second from './registerForms/Second.jsx';
+import Third from './registerForms/Third.jsx';
 
 import { register } from '../api/users.js'
 
@@ -21,6 +26,8 @@ export default function RegisterForm({onSetForm}) {
     const [loading, setLoading] = useState(false);
     const [showPopUp, setShowPopUp] = useState(false);
     const [message, setMessage] = useState("");
+
+    const [currentForm, setCurrentForm] = useState("First");
 
     const [registerData, setRegisterData] = useState({
         first_name: "",
@@ -132,6 +139,13 @@ export default function RegisterForm({onSetForm}) {
         registerData.role = "student";
     }
 
+    const handleNext = () => {
+        if(!registerData.first_name || !registerData.last_name){
+            setFields();
+            return;
+        }
+    }
+
     return (
         <>  {showPopUp && (
                 <div className={styles.popupContainer}>
@@ -142,124 +156,37 @@ export default function RegisterForm({onSetForm}) {
                 </div>
             )}
             <div className={styles.container}>
-                <div className={styles.header}>
-                    LibraSphere
-                </div>
 
                 <FormSwitcher onSetForm={onSetForm} isFocused = "register"/>
-                
+                <RegisterProgress currentForm={currentForm}/>
                 <div className={styles.formContainer}>
-                    <div className={styles.form}>
-                        <div>
-                            <label>First Name</label>
-                            <input 
-                                className={emptyFName ? styles.empty : ""}
-                                type="text"
-                                name="first_name"
-                                value={registerData.first_name}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Middle Name</label>
-                            <input
-                                type="text"
-                                name="middle_name"
-                                value={registerData.middle_name}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                           <label>Last Name</label>
-                            <input
-                                className={emptyLName ? styles.empty : ""}
-                                type="text"
-                                name="last_name"
-                                value={registerData.last_name}
-                                onChange={handleChange}
-                            /> 
-                        </div>
-                    </div>
-                    <div className={styles.sexContainer}>
-                        <label>Sex</label>
-                        <div className={styles.sexChoice}>
-                            <div
-                                onClick={() => {
-                                    setRegisterData({ ...registerData, sex: "male" })
-                                    setSex("male")}}
-                                className={`${styles.male} ${sex == "male" ? styles.maleFocus : ""}`}
-                                >
-                                Male
-                            </div>
-                            <div
-                                onClick={() => {
-                                    setRegisterData({ ...registerData, sex: "female" })
-                                    setSex("female")}}
-                                className={`${styles.male} ${sex == "female" ? styles.femaleFocus : ""}`}
-                                >
-                                Female
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.form}>
-                        <div>
-                            <label>Student Number</label>
-                            <input
-                                className={emptyStudNumber ? styles.empty : ""}
-                                type="text" name="student_number"
-                                value={registerData.student_number}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Program</label>
-                            <select name="program" value={registerData.program} className={emptyProgram ? styles.empty : ""} onChange={handleChange}>
-                                <option value="" disabled hidden></option>
-                                <option value="BSCS">BSCS</option>
-                                <option value="BSN">BSN</option>
-                                <option value="BSPT">BSPT</option>
-                                <option value="BSMLS">BSMLS</option>
-                                <option value="BSCRIM">BSCRIM</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label>Email</label>
-                            <input
-                                className={emptyEmail ? styles.empty : ""}
-                                type="text"
-                                name="email"
-                                value={registerData.email}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Password</label>
-                            <input
-                                className={emptyPassword ? styles.empty : ""}
-                                type="password"
-                                name="password"
-                                value={registerData.password}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Confirm Password</label>
-                            <input
-                                className={emptyConfirmPassword ? styles.empty : ""}
-                                type="password"
-                                name="confirm_password"
-                                value={registerData.confirm_password}
-                                onChange={handleChange}
-                                />
-                        </div>
-                    </div>
+                    {currentForm === "First" && <First handleChange={handleChange} setRegisterData={setRegisterData} registerData={registerData}/>}
+                    {currentForm === "Second" && <Second sex={sex} setSex={setSex} setRegisterData={setRegisterData} registerData={registerData}/>}
+                    {currentForm === "Third" && <Third /> }
                 </div>
+                
                 <div className={styles.button}>
-                    <div className={styles.message}>
+                    <p className={styles.message}>
                         {confirmPassError ? "Passwords Must Match!" : ""}
                         {invalidEmailError ? "Invalid Email" : ""}
-                    </div>
-                    <button onClick={handleRegister}>{loading ? "Processing..." : "Register"}</button>
+                    </p>
+                    {currentForm === "First" && <button onClick={() => setCurrentForm("Second")}>Next</button>}
+                    {currentForm === "Second" && (
+                        <>
+                            <div className={styles.next}>
+                                <button onClick={() => setCurrentForm("First")}>Back</button>
+                                <button onClick={() => setCurrentForm("Third")}>Next</button>
+                            </div>
+                        </>
+                    )}
+                    {currentForm === "Third" && (
+                        <>
+                            <div className={styles.next}>
+                                <button onClick={() => setCurrentForm("Second")}>Back</button>
+                                <button>Register</button>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
         </>

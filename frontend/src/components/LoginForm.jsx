@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { login } from '../api/users.js'
 
-import styles from '../styles/loginform.module.css'
+import styles from '../styles/authPage/loginform.module.css'
 import FormSwitcher from './FormSwitcher'
 
 export default function LoginForm({onSetForm, onLogIn, setRole}) {
@@ -45,15 +45,9 @@ export default function LoginForm({onSetForm, onLogIn, setRole}) {
     return(
         <>
             <div className={styles.container}>
-                <div className={styles.header}> {/*Header*/}
-                   <p>LibraSphere</p>
-                </div>
 
                 <FormSwitcher onSetForm={onSetForm} isFocused = "login"/>
 
-                <div className={(!invalid) ? styles.hidden : styles.message}>
-                    <p>Invalid Email/Password</p>
-                </div>
                 <form className={styles.form} onSubmit={(e) => {e.preventDefault(); handleLogIn;}}> {/*Forms*/}
                     <label>Email</label>
                        <input className={(emptyEmail) ? styles.empty : ""}
@@ -76,6 +70,9 @@ export default function LoginForm({onSetForm, onLogIn, setRole}) {
                                 setEmptyPass(false);
                             }}
                         /> 
+                    <div className={(!invalid) ? styles.hidden : styles.message}>
+                        <p>Invalid Email/Password</p>
+                    </div>
                     <div className={styles.button}> {/*Button*/}
                         <div className={styles.forgotPass}><u>Forgot Password?</u></div>
 

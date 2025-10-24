@@ -8,7 +8,7 @@
     box-sizing: border-box;
     border-radius: 15px;
     background-color: #ededed;
-    height: 5vh;
+    min-height: 50px;
     width: 100%;
     gap:1%;
 }
