@@ -55,7 +55,7 @@ python manage.py runserver
 ### 3. Setup frontend
 
 ```
-cd ../frontend
+cd frontend
 npm install
 npm run dev
 ```

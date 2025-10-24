@@ -4,7 +4,12 @@
     width: 100vw;
     align-items: center;
     justify-content: center;
-    background-color: rgb(51, 80, 51);
+    background-color: rgb(255, 255, 255);
+    background-image: url(https://i.pinimg.com/1200x/5e/24/f9/5e24f902ffa3812ac51aa8331246eb8f.jpg);
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+    background-attachment: fixed;
 }
 
 .loggedIn {

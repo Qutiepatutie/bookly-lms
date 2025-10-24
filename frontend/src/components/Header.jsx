@@ -2,7 +2,7 @@ import styles from '../styles/header.module.css'
 
 import placeholder from '../assets/placeholder.jpg'
 
-export default function Header({currentPage}) {
+export default function Header({currentPage, role}) {
     return (
         <>
             <div className={styles.container}>
@@ -13,7 +13,7 @@ export default function Header({currentPage}) {
                     <img src={placeholder} className={styles.icon}/>
                     <div>
                         <p>{localStorage.getItem("user")}</p>
-                        <p className={styles.id}>ID: xxxxxxx</p>
+                        <p className={styles.id}>ID:{localStorage.getItem("student_number")} </p>
                     </div>
                 </div>
             </div>
