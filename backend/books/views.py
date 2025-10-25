@@ -18,6 +18,9 @@ def getBooks(request):
         resp = requests.get(f"http://openlibrary.org/subjects/{category}.json?limit=50")
         data_key = "works"
 
+    else: # Handles the UnboundLocalError if neither generalSearch nor category is provided in the URL
+        return JsonResponse([], safe=False)
+
     for work in resp.json().get(data_key, []):
         title = work.get("title")
         workKey = work.get("key").split("/")[2]
