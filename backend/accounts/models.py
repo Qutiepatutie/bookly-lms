@@ -1,7 +1,6 @@
 from django.db import models
-from django.conf import settings
 
-#Manages user profiles linked to the built-in User model
+#Manages users
 class Gender(models.TextChoices):
     MALE = 'male', 'Male'
     FEMALE = 'female', 'Female'
