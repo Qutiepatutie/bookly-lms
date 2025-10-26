@@ -27,7 +27,7 @@ class UserProfile(models.Model):
     middle_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True)
     sex = models.CharField(max_length=10, choices=Gender.choices, blank=True, null=True)
-    student_number = models.CharField(max_length=13, unique=True) # e.g., "0623-000-1234"
+    student_number = models.CharField(max_length=13, unique=True)
     program = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
