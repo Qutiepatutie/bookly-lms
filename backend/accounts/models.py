@@ -40,7 +40,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(
         UserLogin,
         on_delete=models.CASCADE,
-        primary_key=True
+        primary_key=True,
+        related_name='profile'
     )
     
     first_name = models.CharField(

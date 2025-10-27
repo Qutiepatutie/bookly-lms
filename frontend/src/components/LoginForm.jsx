@@ -25,13 +25,13 @@ export default function LoginForm({onSetForm, onLogIn, setRole}) {
         setLoading(false);
         
         if(data.status == 'success'){
-            localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("user", data.user);
-            localStorage.setItem("student_number", data.student_number);
-            localStorage.setItem("role", data.role);
+            sessionStorage.setItem("isLoggedIn", "true");
+            sessionStorage.setItem("user", data.user);
+            sessionStorage.setItem("student_number", data.student_number);
+            sessionStorage.setItem("role", data.role);
 
             setInvalid(false);
-            setRole(localStorage.getItem("role"));
+            setRole(sessionStorage.getItem("role"));
             onLogIn(true);
             setEmailInput("");
             setPassInput("");

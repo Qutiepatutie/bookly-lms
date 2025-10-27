@@ -22,7 +22,7 @@ export default function App(){
     const [role, setRole] = useState("");
 
     useEffect(() => {
-        const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+        const loggedIn = sessionStorage.getItem("isLoggedIn") === "true";
         if(loggedIn){
             setIsAuthorized(true);
             /* setRole(localStorage.getItem("role")); */
