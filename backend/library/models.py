@@ -96,7 +96,7 @@ class BorrowRecords(models.Model):
         primary_key=True
     )
 
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         UserProfile,
         on_delete=models.CASCADE
     )
@@ -126,6 +126,9 @@ class BorrowRecords(models.Model):
         choices=StatusChoices.choices,
         default=StatusChoices.ACTIVE,
     )
+
+    class Meta:
+        db_table = 'borrow_records'
 
     def save(self, *args, **kwargs):
         if not self.pk:
