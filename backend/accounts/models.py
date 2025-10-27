@@ -10,8 +10,36 @@ class RoleChoices(models.TextChoices):
     FACULTY = 'faculty', 'Faculty'
     ADMIN = 'admin', 'Admin'
 
+
+
+class UserLogin(models.Model):
+    id = models.AutoField(
+        primary_key=True,
+    )
+
+    email = models.CharField(   
+        max_length=100,
+        unique=True
+    )
+
+    password = models.CharField(
+        max_length=128,
+        unique=True
+    )
+
+    role = models.CharField(
+        max_length=10,
+        choices=RoleChoices.choices,
+        default=RoleChoices.STUDENT
+    )
+
+    class Meta:
+        db_table = 'user_login'
+
 class UserProfile(models.Model):
-    user_id = models.AutoField(
+    user = models.OneToOneField(
+        UserLogin,
+        on_delete=models.CASCADE,
         primary_key=True
     )
     
@@ -51,29 +79,3 @@ class UserProfile(models.Model):
 
     class Meta:
         db_table = 'user_profile'
-
-class UserLogin(models.Model):
-    user_id = models.OneToOneField(
-        UserProfile,
-        on_delete=models.CASCADE,
-        primary_key=True
-    )
-
-    email = models.CharField(   
-        max_length=100,
-        unique=True
-    )
-
-    password = models.CharField(
-        max_length=128,
-        unique=True
-    )
-
-    role = models.CharField(
-        max_length=10,
-        choices=RoleChoices.choices,
-        default=RoleChoices.STUDENT
-    )
-
-    class Meta:
-        db_table = 'user_login'
