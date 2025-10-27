@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard.jsx'
 import Library from './pages/Library.jsx'
 import BorrowedBooks from './pages/BorrowedBooks.jsx'
 
+import ViewBook from "./components/ViewBook.jsx"
 import Settings from './components/Settings.jsx'
 
 import Auth from './pages/Auth.jsx'
@@ -18,6 +19,7 @@ export default function App(){
     const [currentPage, setCurrentPage] = useState("Dashboard");
     const [isAuthorized, setIsAuthorized] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [viewBook, setViewBook] = useState(false);
 
     const [role, setRole] = useState("");
 
@@ -37,9 +39,10 @@ export default function App(){
                     <Sidebar onNavigate={setCurrentPage} isOpen={setIsOpen} role={role}/>
                     <Header currentPage={currentPage}/>
                     <Settings isOpen={isOpen} setIsOpen={setIsOpen} onLogOut={setIsAuthorized} setCurrentPage={setCurrentPage}/>
+                    <ViewBook viewBook={viewBook} setViewBook={setViewBook}/>
 
                     {currentPage === "Dashboard" && <Dashboard />}
-                    {currentPage === "Library" &&  <Library />}
+                    {currentPage === "Library" &&  <Library setViewBook={setViewBook}/>}
                     {currentPage === "Borrowed Books" && <BorrowedBooks />}
                 </div>
             }

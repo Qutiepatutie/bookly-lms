@@ -4,7 +4,7 @@ import searchIcon from '../assets/search-icon.svg'
 import { useState, useEffect } from 'react';
 import { getBooks } from '../api/books'
 
-export default function Library(){
+export default function Library({ setViewBook }){
     const [booksByCategory, setBooksByCategory] = useState({
         computer: [],
         math: [],
@@ -75,7 +75,7 @@ export default function Library(){
 
                 <div className={`${styles.searchScroll} ${searching ? styles.show : ""}`}>
                     {booksBySearch.map((book, i) => (
-                        <div key ={i} className={styles.bookPanels}>
+                        <div key ={i} className={styles.bookPanels} onClick={() => setViewBook(true)}>
                             {book.cover_url && (
                                 <img
                                     src={book.cover_url ? book.cover_url : searchIcon}
@@ -97,7 +97,7 @@ export default function Library(){
                         </div>
                         <div className={styles.books}>
                             {booksByCategory[category.toLowerCase()]?.map((book, j) => (
-                                <div key={j} className={styles.bookPanels}>
+                                <div key={j} className={styles.bookPanels} onClick={() => setViewBook(true)}>
                                     {book.cover_url && (
                                         <img
                                             src={book.cover_url}

@@ -56,6 +56,10 @@
     border-color: #b8b8b8;
 }
 
+.searchIconContainer:hover{
+    cursor: pointer;
+}
+
 .searchScroll {
     display: none;
     margin-top: 15vh;
