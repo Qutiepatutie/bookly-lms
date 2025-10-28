@@ -56,6 +56,12 @@ class Books(models.Model):
         max_length=100
     )
 
+    tags = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text='Comma-separated tags for the book'
+    )
+
     publisher = models.CharField(
         max_length=100
     )
@@ -74,7 +80,6 @@ class Books(models.Model):
         help_text='Number of pages'
     )
     
-
     #Media
     book_cover_path = models.CharField(
         max_length=2048,
