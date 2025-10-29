@@ -14,3 +14,19 @@ export async function getBooks({ generalSearch="", category=""}) {
     }
     return await res.json();
 }
+
+export async function viewBookInfo(work_key) {
+    const resp = await fetch(`http://127.0.0.1:8000/viewBook/?work_key=${work_key}`);
+
+    if(!resp.ok){
+        throw new Error("Failed to retrieve data");
+    }
+
+    const data = await resp.json();
+    
+    if(!data){
+        return null;
+    }
+
+    return data;
+}

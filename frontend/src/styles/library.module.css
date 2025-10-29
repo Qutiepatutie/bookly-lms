@@ -157,6 +157,8 @@
     width: 200px;
     font-size: 0.8rem;
     border-radius: 10px;
+
+    user-select: none;
 }
 
 .bookPanels:hover {

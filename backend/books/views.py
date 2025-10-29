@@ -20,7 +20,8 @@ def getBooks(request):
 
     for work in resp.json().get(data_key, []):
         title = work.get("title")
-        workKey = work.get("key").split("/")[2]
+        key = work.get("key", "")
+        workKey = key.split("/")[2] if "/" in key else key
 
         if data_key =="docs":
             authors = [{"name" : n} for n in work.get("author_name", [])]
@@ -43,3 +44,41 @@ def getBooks(request):
             })
 
     return JsonResponse(books, safe=False)
+
+def viewBook(request):
+    info = []
+
+    work_key = request.GET.get("work_key")
+    if not work_key:
+        return JsonResponse({"error" : "Missing work key"})
+    
+
+    resp = requests.get(f"https://openlibrary.org/works/{work_key}/editions.json")
+    data = resp.json()
+    entries = data.get("entries", [])
+
+    if not entries:
+        return JsonResponse({"error" : "Failed to fetch editions"})
+    
+
+    edition_key = data["entries"][0]["key"]
+    edition_data = requests.get(f"https://openlibrary.org{edition_key}.json").json()
+
+    info.append({
+        "description" : (edition_data.get("description", {}).get("value")
+            if isinstance(edition_data.get("description"), dict)
+            else edition_data.get("description", "No description available")),
+        "isbn10" : edition_data.get("isbn_10") or [],
+        "isbn13" : edition_data.get("isbn_13") or [],
+        "pages": edition_data.get("number_of_pages", "Unknown"),
+        "publisher": edition_data.get("publishers", ["Unknown"])[0],
+        "year_published": edition_data.get("publish_date", "Unknown"),
+        "genres": edition_data.get("subjects", []),
+    })
+    
+    return JsonResponse(info, safe=False)
+
+
+   
+
+

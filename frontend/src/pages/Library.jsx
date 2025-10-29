@@ -4,7 +4,7 @@ import searchIcon from '../assets/search-icon.svg'
 import { useState, useEffect } from 'react';
 import { getBooks } from '../api/books'
 
-export default function Library({ setViewBook }){
+export default function Library({ setViewBook, setBookTitle, setBookAuthor, setBookCoverURL, setWorkKey }){
     const [booksByCategory, setBooksByCategory] = useState({
         computer: [],
         math: [],
@@ -30,7 +30,7 @@ export default function Library({ setViewBook }){
                 });
 
                 setBooksByCategory(booksData);
-                booksData.computer.forEach((e) => console.log(e.work_key)); //make function for fetching book datas
+                /* booksData.computer.forEach((e) => console.log(e.work_key)); */ //make function for fetching book datas
             }catch (err) {
                 console.log(err);
             }
@@ -56,6 +56,14 @@ export default function Library({ setViewBook }){
         setSearching(true);
     };
 
+    const handleViewBook = (title, author, coverURL, work_key) => {
+        setBookTitle(title);
+        setBookAuthor(author);
+        setBookCoverURL(coverURL);
+        setWorkKey(work_key);
+        setViewBook(true);
+    }
+
     return(
         <>
             <div className={styles.library}>
@@ -75,7 +83,7 @@ export default function Library({ setViewBook }){
 
                 <div className={`${styles.searchScroll} ${searching ? styles.show : ""}`}>
                     {booksBySearch.map((book, i) => (
-                        <div key ={i} className={styles.bookPanels} onClick={() => setViewBook(true)}>
+                        <div key ={i} className={styles.bookPanels} onClick={() => handleViewBook(book.title, book.author, book.cover_url, book.work_key)}>
                             {book.cover_url && (
                                 <img
                                     src={book.cover_url ? book.cover_url : searchIcon}
@@ -97,7 +105,7 @@ export default function Library({ setViewBook }){
                         </div>
                         <div className={styles.books}>
                             {booksByCategory[category.toLowerCase()]?.map((book, j) => (
-                                <div key={j} className={styles.bookPanels} onClick={() => setViewBook(true)}>
+                                <div key={j} className={styles.bookPanels} onClick={() => handleViewBook(book.title, book.author, book.cover_url, book.work_key)}>
                                     {book.cover_url && (
                                         <img
                                             src={book.cover_url}
