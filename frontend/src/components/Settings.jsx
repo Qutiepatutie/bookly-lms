@@ -4,9 +4,9 @@ import close from '../assets/close-icon.svg'
 export default function Settings({isOpen, setIsOpen, onLogOut, setCurrentPage}){
 
     const handleLogOut = () => {
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("user");
-        localStorage.removeItem("role");
+        sessionStorage.removeItem("isLoggedIn");
+        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("role");
         onLogOut(false);
         setIsOpen(false);
         setCurrentPage("dashboard");

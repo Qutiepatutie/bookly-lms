@@ -28,7 +28,6 @@ class Books(models.Model):
     call_number = models.CharField(
         primary_key=True,
         max_length=20,
-        help_text='Eg... 300.J221 2019'
     )
 
     ISBN = models.CharField(
@@ -37,29 +36,26 @@ class Books(models.Model):
         validators=[
             RegexValidator(
                 regex=r'^(?:\d{10}|\d{13})$',
-                message='ISBN must be either 10 or 13 digits'
             )
         ], 
-        help_text='Enter 10 or 13 digit ISBN number'
     )
 
     book_title = models.CharField(
         max_length=200
         )
     
+    book_author = models.CharField(
+        max_length=100
+    )
+    
     edition = models.CharField(
         max_length=50,
         blank=True
     )
 
-    book_author = models.CharField(
-        max_length=100
-    )
-
     tags = models.CharField(
         max_length=200,
         blank=True,
-        help_text='Comma-separated tags for the book'
     )
 
     publisher = models.CharField(
@@ -70,14 +66,12 @@ class Books(models.Model):
         validators=[
             MinValueValidator(1000) #if year is less than 1000, raise error
             ],
-        help_text='Enter year in YYYY format'
     )
 
     pages = models.PositiveIntegerField(
         validators=[
             MinValueValidator(1) #at least 1 page
         ],
-        help_text='Number of pages'
     )
     
     #Media
@@ -85,9 +79,7 @@ class Books(models.Model):
         max_length=2048,
         blank=True,
         null=True,
-        help_text='Path to book cover image'
     )
-
 
     class Meta:
         db_table = 'books'

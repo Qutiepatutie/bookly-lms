@@ -8,6 +8,7 @@ import Header from './components/Header.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Library from './pages/Library.jsx'
 import BorrowedBooks from './pages/BorrowedBooks.jsx'
+import AddBooks from './pages/AddBooks.jsx'
 
 import ViewBook from "./components/ViewBook.jsx"
 import Settings from './components/Settings.jsx'
@@ -37,10 +38,10 @@ export default function App(){
     }, []);
 
     return (
-        <>
+        <>  
             <Auth onLogIn={setIsAuthorized} isAuthorized={isAuthorized} setRole={setRole}/>
             {isAuthorized &&
-                <div className={`${styles.main} ${role === "admin" ? "admin" : ""}`}>
+                <div className={`${styles.main} ${sessionStorage.getItem("role") === "admin" ? "admin" : ""}`}>
                     <Sidebar onNavigate={setCurrentPage} isOpen={setIsOpen} role={role}/>
                     <Header currentPage={currentPage}/>
                     <Settings isOpen={isOpen} setIsOpen={setIsOpen} onLogOut={setIsAuthorized} setCurrentPage={setCurrentPage}/>
@@ -63,8 +64,10 @@ export default function App(){
                                                     />}
 
                     {currentPage === "Borrowed Books" && <BorrowedBooks />}
+                    {currentPage === "Add Books" && <AddBooks />}
                 </div>
             }
+            
         </>
     )
 }

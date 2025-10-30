@@ -1,0 +1,140 @@
+.container {
+    margin-left: 3.5vw;
+    margin-top: 7vh;
+
+    width: 100vw;
+    height: 93vh;
+    padding: 50px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* background-color: rgb(16, 44, 16); */
+}
+
+.addBookContainer{
+    width: 1450px;
+    height: 700px;
+
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    /* background-color: gray; */
+}
+
+.coverContainer {
+    width: 30%;
+    height: 100%;
+    
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 3px dashed #4D643A;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #4D643A;
+    font-size: 3rem;
+    user-select: none;
+
+    background-color: rgba(255,255,255,0.05);
+}
+
+.coverContainer:hover{
+    background-color: rgba(255,255,255,0.1);
+    color: rgb(77, 100, 58, .9);
+}
+
+.infos {
+    width: 70%;
+    height: 100%;
+
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
+    box-sizing: border-box;
+
+    padding: 50px 50px 10px 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+
+    background-color: white;
+}
+
+.fields {
+    height: 85%;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px 10px;
+
+    /* background-color: gray; */
+}
+
+.fields div {
+    display: flex;
+    flex-direction: column;
+}
+
+.infos input, textarea {
+    height: 40px;
+    width: 350px;
+
+    background-color: #EDEDED;
+    border: none;
+    border-radius: 5px;
+
+    box-sizing: border-box;
+    padding-left: 5px;
+    font-size: 1rem;
+}
+
+.infos textarea.description {
+    height: 120px;
+    resize: none;
+    padding-top: 5px;
+}
+
+.infos input:focus,
+.infos textarea:focus {
+    outline: 2px solid #4D643A;
+}
+
+.buttons {
+    margin-top: auto;
+    width: 100%;
+    height: 10%;
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+
+    /* background-color: grey; */
+}
+
+.buttons button {
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+    border: none;
+
+    background-color: #EDEDED;
+    
+}
+
+.buttons button:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
+.buttons button:last-child {
+    color: white;
+    background-color: #4D643A;
+} 

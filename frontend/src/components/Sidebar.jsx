@@ -5,6 +5,7 @@ import styles from '../styles/sidebar.module.css'
 import dashboard from '../assets/sidebar/dashboard.svg'
 import library from '../assets/sidebar/library.svg'
 import borrowedBooks from '../assets/sidebar/borrowedBooks.svg'
+import addbook from '../assets/sidebar/addbook-icon.svg'
 import settings from '../assets/sidebar/settings.svg'
 import greenLogo from '../assets/green-libraSphere-logo.svg'
 import redLogo from '../assets/red-libraSphere-logo.svg'
@@ -18,7 +19,7 @@ export default function Sidebar({ onNavigate, isOpen, role }){
         <>
             <div className={`${styles.sidebar} ${extended ? styles.extended : ""}`}>
                 <div className={styles.header}>
-                    <img src={role==="admin" ? redLogo : greenLogo} className={styles.logo}/>
+                    <img src={sessionStorage.getItem("role") === "admin" ? redLogo : greenLogo} className={styles.logo}/>
                     <h1>LibraSphere</h1>
                 </div>
                 <hr className={styles.divider} />
@@ -37,6 +38,15 @@ export default function Sidebar({ onNavigate, isOpen, role }){
                     <div onClick={() => {setFocused("Borrowed Books"); onNavigate("Borrowed Books")}} className={focused === "Borrowed Books" ? styles.focused : ""}>
                         <img src={borrowedBooks} className={styles.icons}/>
                         <p>Borrowed Books</p>
+                    </div>
+
+                    <div
+                        onClick={() => {setFocused("Add Books"); onNavigate("Add Books")}}
+                        className={`${focused === "Add Books" ? styles.focused : ""}
+                                    ${sessionStorage.getItem("role") === "admin" ? "" : styles.hidden}`}
+                    >
+                        <img src={addbook} className={styles.icons}/>
+                        <p>Add Books</p>
                     </div>
 
                     <div onClick={() => isOpen(true)} className={styles.settingsButton}>

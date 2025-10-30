@@ -65,6 +65,10 @@
     user-select: none;
 }
 
+.buttons div.hidden {
+    display: none;
+}
+
 .settingsButton {
     position: absolute;
     width: 80%;

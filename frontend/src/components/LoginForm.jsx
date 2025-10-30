@@ -14,6 +14,7 @@ export default function LoginForm({onSetForm, onLogIn, setRole}) {
     const [invalid, setInvalid] = useState(false);
 
     const handleLogIn = async () => {
+        setInvalid(false);
         if(!emailInput || !passInput || loading){
             setEmptyEmail((!emailInput) ? true : false);
             setEmptyPass((!passInput) ? true : false);
