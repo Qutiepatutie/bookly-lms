@@ -1,9 +1,8 @@
-import { useState,useEffect } from "react"
+import { useState,useEffect, useRef } from "react"
 
 import styles from "../styles/addbooks.module.css"
-import huh from "../assets/placeholder.jpg"
 
-import { autofillBookInfo } from "../api/books";
+import { autofillBookInfo, addBook } from "../api/books";
 
 export default function AddBooks() {
 
@@ -34,12 +33,16 @@ export default function AddBooks() {
     const [autofilled, setAutofilled] = useState(false);
     const [validCover, setValidCover] = useState(false);
 
+    const [loading, setLoading] = useState(false);
+    const [confirmMessage, setConfirmMessage] = useState(false);
+
     // Clear fields
     const handleClear = () => {
         setInvalidISBN(false);
         setEmptyFields(createEmptyFields());
         setBookData(initialBookData);
         setAutofilled(false);
+        setValidCover(false);
     }
 
     // Change values of fields
@@ -65,7 +68,6 @@ export default function AddBooks() {
                             .keys(initialBookData)
                             .filter(key => !["isbn",
                                             "classification",
-                                            "tags",
                                             "callNumber",
                                             "coverURL"].includes(key))
                             .map(key => [key, value]));
@@ -80,9 +82,9 @@ export default function AddBooks() {
             setInvalidISBN(true);
             return;
         }
+
         setInvalidISBN(false);
         setBookData(handleLoadData("Autofilling..."));
-        setAutofilled(true);
 
         const data = await autofillBookInfo(e.value);
 
@@ -108,29 +110,34 @@ export default function AddBooks() {
 
         setBookData(updatedData);
         setEmptyFields(handleEmptyFields(updatedData));
+        setAutofilled(true);
     }
 
     // Check valid cover image
     useEffect(() => {
-    const checkCover = async () => {
-        const url = bookData.coverURL;
+        const checkCover = async () => {
+            const url = bookData.coverURL;
 
-        if(!url || !autofilled) return;
-        if(url === "None") setValidCover(false);
+            if(!url || url === "None" || !autofilled){
+                setValidCover(false);
+                return;
+            }
 
-        const res = await fetch(url);
-        const blob = await res.blob();
+            const res = await fetch(url);
+            const blob = await res.blob();
 
-        if (blob.size < 2000) {
-            setValidCover(false);
-        } else {
-            setValidCover(true);
-        }
-    };
+            if (blob.size < 2000) {
+                setBookData({ ...bookData, "coverURL": "None" })
+                setValidCover(false);
+            } else {
+                setValidCover(true);
+            }
+        };
 
-    checkCover();
+        const delay = setTimeout(checkCover, 100);
+        return () => clearTimeout(delay);
 
-    }, [bookData.coverURL]);
+    }, [bookData.coverURL, autofilled]);
 
     // Autofill simplified call number
     const handleCallNumber = (classificationCode, authorName, year) => {
@@ -165,26 +172,100 @@ export default function AddBooks() {
         return Object.fromEntries(
                 Object.entries(data)
                     .filter(key => key !== "coverURL")
-                    .map(([key, value]) => [key, value === ""])
+                    .map(([key, value]) => [key, (value === "" || (Array.isArray(value) && value.length === 0))])
                 );
     };
-
-    // Add Books
-    const handleSubmit = () => {
-        setEmptyFields(handleEmptyFields(bookData));
+    
+    const popups = {
+        submit : useRef(null),
+        confirm : useRef(null),  
     }
+
+    const openPopUp = (curr) => popups[curr].current?.showModal();
+    const closePopUp = (curr) => popups[curr].current?.close();
+        
+
+    // Check book infos
+    const handleCheckFields = () => {
+
+        const empty = handleEmptyFields(bookData)
+        setEmptyFields(empty);
+
+        const hasEmpty = Object.values(empty).some(v => v === true);
+
+        if(hasEmpty){
+            console.log("Empty Fields");
+            return;
+        }
+
+        openPopUp("submit");
+    }
+
+    // Confirmation Pop up
+    const handleConfirm = async () => {
+        setLoading(true);
+        const data = await addBook(bookData);
+        console.log(data.message);
+        setLoading(false);
+
+        if(data.status == "failed"){
+            setConfirmMessage(data.message);
+            openPopUp("confirm");
+            return;
+        }
+
+        setConfirmMessage(data.message);
+        openPopUp("confirm");
+        return;
+    }
+
+    // Book Added Pop Up
+    const handleAdded = () => {
+        setBookData(initialBookData);
+        setAutofilled(false);
+        setValidCover(false);
+        closePopUp("confirm");
+        closePopUp("submit");
+    }
+
 
     return(
         <>
+            <dialog ref={popups.submit} className={styles.confirmPopUp}>
+                
+                <dialog ref={popups.confirm} className={styles.addedPopUp}>
+                    <p>{confirmMessage}</p>
+                    <button onClick={handleAdded}>
+                        Confirm
+                    </button>
+                </dialog>
+                
+                <h2>Are you sure you want to add this book?</h2>
+                <div className={styles.cover}>
+                   <img src={bookData.coverURL}/> 
+                   <label>{bookData.callNumber}</label>
+                </div>
+                <div className={styles.details}>
+                    <p><span>TITLE:</span>{bookData.title}</p>
+                    <p><span>AUTHOR:</span>{bookData.author}</p>
+                    <p><span>ISBN:</span>{bookData.isbn}</p>
+                </div>
+                <div className={styles.popUpButtons}>
+                    <button onClick={() => closePopUp("submit")}>Cancel</button>
+                    <button onClick={handleConfirm}>Confirm</button>
+                </div>
+                
+            </dialog>
             <div className={styles.container}>
+                
                 <div className={styles.addBookContainer}>
-                    <div className={styles.coverContainer}>
-                        <p className={bookData.coverURL !== "None" ? styles.hidden : ""}>
-                            Add Book<br/>Cover
+                    <div className={`${styles.coverContainer} ${validCover ? styles.validCover : " "}`}>
+                        <p className={validCover ? styles.hidden : ""}>
+                            { !autofilled && !validCover ? <>Add Book<br/>Cover</> : "No Available Cover"}
                         </p>
                         <img
-                            src={validCover ? bookData.coverURL : huh}
-                            className={bookData.coverURL === "None" ? styles.hidden : ""}
+                            src={bookData.coverURL}
+                            className={!validCover ? styles.hidden : ""}
                         />
                     </div>
                     <div className={styles.infos}>
@@ -337,7 +418,7 @@ export default function AddBooks() {
                         </div>
                         <div className={styles.buttons}>
                             <button onClick={handleClear}>Clear</button>
-                            <button onClick={handleSubmit}>Add</button>
+                            <button onClick={handleCheckFields}>Add</button>
                         </div>
                         
                     </div>

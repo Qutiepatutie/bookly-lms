@@ -1,4 +1,5 @@
 .container {
+    z-index: 0;
     margin-left: 3.5vw;
     margin-top: 7vh;
 
@@ -43,9 +44,14 @@
     background-color: rgba(255,255,255,0.05);
 }
 
+.validCover {
+    border:none;
+}
+
 .coverContainer:hover{
     background-color: rgba(255,255,255,0.1);
     color: rgb(77, 100, 58, .9);
+    cursor: pointer;
 }
 
 .coverContainer img{
@@ -150,7 +156,6 @@ select.empty {
     border: none;
 
     background-color: #EDEDED;
-    
 }
 
 .buttons button:hover {
@@ -161,4 +166,129 @@ select.empty {
 .buttons button:last-child {
     color: white;
     background-color: #4D643A;
-} 
+}
+
+.confirmPopUp {
+    z-index: 1001;
+    position: fixed;
+    align-self: center;
+    justify-self: center;
+    padding: 20px;
+    box-sizing: border-box;
+    
+    height: 620px;
+    width: 500px;
+
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+
+    background: white;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.confirmPopUp:open{
+    display: flex;
+}
+
+.confirmPopUp:open::backdrop {
+   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.confirmPopUp .cover {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    font-weight: bold;
+}
+
+.confirmPopUp img {
+    height: 320px;
+    width: 220px;
+    border-radius: 10px;
+}
+
+.popUpButtons {
+    display: flex;
+    justify-content: space-around;
+    gap:10px;
+    width: 100%;
+    height: 35px;
+}
+
+.popUpButtons button {
+    width: 45%;
+    border:none;
+    border-radius: 10px;
+    background-color: #EDEDED;
+}
+
+.popUpButtons button:last-child{
+    background-color: #4D643A;
+    color: white;
+}
+
+.popUpButtons button:hover {
+    transform: scale(1.01);
+    cursor: pointer;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 325px;
+    gap: 8px;
+}
+
+.details p {
+    display: flex;
+    align-items: baseline;
+}
+
+.details span {
+    width: 125px;
+    text-align: right;
+    padding-right: 20px;
+    font-weight: bold;
+}
+
+.addedPopUp {
+    width: 300px;
+    height: 120px;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    align-self: center;
+    justify-self: center;
+
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.addedPopUp:open {
+    display: flex;
+}
+
+/* .addedPopUp::backdrop {
+   background-color: rgba(0, 0, 0, 0.5);
+} */
+
+.addedPopUp button {
+    border-radius: 10px;
+    border: none;
+    background-color: #4D643A;
+    color: white;
+    width: 120px;
+    height: 30px;
+}
+

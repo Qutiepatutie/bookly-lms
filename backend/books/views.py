@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.utils import timezone
 import requests
+import re
 
 # Create your views here.
 
@@ -78,7 +80,40 @@ def viewBook(request):
     
     return JsonResponse(info, safe=False)
 
+def autofillBookInfo(request):
+    today = timezone.localtime(timezone.now()).strftime("%B %d, %Y")
 
+    isbn = request.GET.get("isbn")
+
+    resp1 = requests.get(f"https://openlibrary.org/api/books?bibkeys=ISBN:{isbn}&format=json&jscmd=data")
+    data1 = resp1.json()
+    bookData1 = data1[f"ISBN:{isbn}"]
+
+    if not bookData1: return JsonResponse({"message" : "no book found"})
+
+    workKey = bookData1.get("key").split("/")[2]
+    resp2 = requests.get(f"https://openlibrary.org/books/{workKey}.json")
+    bookData2 = resp2.json()
+
+    subjectNames = bookData1.get("subjects") or []
+    subjects = list({s["name"].strip() for s in subjectNames})
+
+    publishDate = bookData1.get("publish_date") or ""
+    yearPublished = re.sub(r"[^0-9]", "", publishDate)[-4:] or "Unknown"
+
+    return JsonResponse ({
+        "message" : "book found",
+        "title" : bookData1.get("title") or "Unknown",
+        "author" : bookData1.get("authors")[0]["name"] or "Unknown",
+        "edition" : bookData2.get("edition_name") or "Unknown",
+        "description" : bookData2.get("description", {}).get("value") or "None",
+        "publisher" : bookData1.get("publishers")[0]["name"] or "Unknown",
+        "year_published" : yearPublished,
+        "date_acquired" : today,
+        "pages" : bookData1.get("number_of_pages") or bookData1.get("pagination") or "Unknown",
+        "tags" : subjects,
+        "book_cover_url" : f"https://covers.openlibrary.org/b/isbn/{isbn}-L.jpg" or "None"
+    })
    
 
 

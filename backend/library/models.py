@@ -1,9 +1,6 @@
 from django.db import models
-from django.core.validators import RegexValidator, MinValueValidator
 from django.utils import timezone
 from accounts.models import UserProfile
-
-#NOT FINISHED, PLS DON'T TEST :)
 
 class StatusChoices(models.TextChoices):
     ACTIVE = 'active', 'Active'
@@ -27,22 +24,17 @@ class BookCallnumberChoices(models.TextChoices):
 class Books(models.Model):
     call_number = models.CharField(
         primary_key=True,
-        max_length=20,
+        max_length=50,
     )
 
     ISBN = models.CharField(
         max_length=13,
         blank=True,
-        validators=[
-            RegexValidator(
-                regex=r'^(?:\d{10}|\d{13})$',
-            )
-        ], 
     )
 
     book_title = models.CharField(
         max_length=200
-        )
+    )
     
     book_author = models.CharField(
         max_length=100
@@ -53,25 +45,21 @@ class Books(models.Model):
         blank=True
     )
 
-    tags = models.CharField(
-        max_length=200,
-        blank=True,
+    tags = models.JSONField(
+        default=list,
+        blank=True
     )
 
     publisher = models.CharField(
         max_length=100
     )
 
-    year_published = models.PositiveIntegerField(
-        validators=[
-            MinValueValidator(1000) #if year is less than 1000, raise error
-            ],
+    year_published = models.CharField(
+        max_length=4
     )
 
-    pages = models.PositiveIntegerField(
-        validators=[
-            MinValueValidator(1) #at least 1 page
-        ],
+    pages = models.CharField(
+        max_length=10
     )
     
     #Media
@@ -79,6 +67,11 @@ class Books(models.Model):
         max_length=2048,
         blank=True,
         null=True,
+    )
+
+    date_acquired = models.CharField(
+        max_length=100,
+        blank=True
     )
 
     class Meta:
@@ -126,8 +119,3 @@ class BorrowRecords(models.Model):
 
     class Meta:
         db_table = 'borrow_records'
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            self.due_date = self.borrow_date + timezone.timedelta(days=7)
-            super(BorrowRecords, self).save(*args, **kwargs)

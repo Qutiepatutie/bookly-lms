@@ -1,6 +1,5 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from django.utils.decorators import method_decorator
 from django.contrib.auth.hashers import make_password, check_password
 import json
 
