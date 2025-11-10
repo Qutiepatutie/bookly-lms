@@ -2,60 +2,38 @@ import { useState,useEffect } from "react"
 
 import close from "../assets/close-icon.svg"
 import styles from "../styles/viewbook.module.css"
-import { viewBookInfo } from "../api/books";
+import huh from "../assets/placeholder.jpg"
 
-export default function ViewBook({viewBook, setViewBook}) {
+export default function ViewBook({ viewBook, setViewBook, book}) {
 
-    const [description, setDescription] = useState("none");
-    const [callNumber, setCallNumber] = useState("none");
-    const [isbn, setIsbn] = useState("none");
-    const [pages, setpages] = useState("unknown");
-    const [publisher, setPublisher] = useState("unknown");
-    const [yearPublished, setyearPublished] = useState("unknown");
-    const [genre, setGenre] = useState("unknown");
-
-    useEffect(() => {
-        async function loadInfo() {
-
-            setCallNumber("Loading..")
-            setDescription("Loading..");
-            setIsbn("Loading..");
-            setpages("Loading..");
-            setPublisher("Loading..");
-            setyearPublished("Loading..");
-        }
-
-        loadInfo();
-        
-    }, [viewBook]);
+    if(!viewBook || !book) return null;
 
     return (
         <>
-            {/*TODO: FIX VIEW BOOKS FUNCTION */}
             <div className={viewBook ? styles.container : styles.hidden}>
                 <div className={styles.viewBook}>
                     <div className={styles.bookCoverContainer}>
-                        {/* <img src="none" className={styles.bookCover} /> */}
+                        <img src={book.cover_path} className={styles.bookCover} />
                     </div>
 
                     <div className={styles.bookInfo}>
                         <div className={styles.infoHeader}>
                             <div>
-                                {/* <h2>{bookTitle}</h2> */}
-                                {/* <h4 className={styles.author}>{bookAuthor}</h4> */}
+                                <h2>{book.title}</h2>
+                                <h4 className={styles.author}>{book.author}</h4>
                             </div>
                         </div>
                         <hr style={{marginTop: "10px"}}/>
                         <p className={styles.description}>
-                            {description}    
+                            {book.description}    
                         </p>
                         <div className={styles.details}>
-                            <p><span>CALL NUMBER:</span>{callNumber}</p>
-                            <p><span>ISBN:</span>{isbn}</p>
-                            <p><span>PAGES:</span>{pages}</p>
-                            <p><span>PUBLISHER:</span>{publisher}</p>
-                            <p><span>YEAR PUBLISHED:</span>{yearPublished}</p>
-                            <p><span>GENRE:</span>{genre}</p> 
+                            <p><span>CALL NUMBER:</span>{book.call_number}</p>
+                            <p><span>ISBN:</span>{book.ISBN}</p>
+                            <p><span>PAGES:</span>{book.pages}</p>
+                            <p><span>PUBLISHER:</span>{book.publisher}</p>
+                            <p><span>YEAR PUBLISHED:</span>{book.year_published}</p>
+                            <p><span>TAGS:</span>{book.tags}</p> 
                         </div>
                         
                     </div>

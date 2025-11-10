@@ -26,10 +26,7 @@ export default function App(){
 
     const [role, setRole] = useState("");
 
-    const [bookTitle, setBookTitle] = useState("");
-    const [bookAuthor, setBookAuthor] = useState("");
-    const [bookCoverURL, setBookCoverURL] = useState("");
-    const [workKey, setWorkKey] = useState("");
+    const [book, setBook] = useState(null);
 
     useEffect(() => {
         const loggedIn = sessionStorage.getItem("isLoggedIn") === "true";
@@ -49,21 +46,12 @@ export default function App(){
                     <Settings isOpen={isOpen} setIsOpen={setIsOpen} onLogOut={setIsAuthorized} setCurrentPage={setCurrentPage}/>
                     <ViewBook
                         viewBook={viewBook}
-                        setViewBook={setViewBook}
-                        bookTitle={bookTitle}
-                        bookAuthor={bookAuthor}
-                        bookCoverURL={bookCoverURL}
-                        workKey={workKey}
+                        setViewBook={setViewBook}   
+                        book={book}
                     />
 
                     {currentPage === "Dashboard" && <Dashboard />}
-                    {currentPage === "Library" &&  <LibraryCopy 
-                                                        setViewBook={setViewBook}
-                                                        setBookTitle={setBookTitle}
-                                                        setBookAuthor={setBookAuthor}
-                                                        setBookCoverURL={setBookCoverURL}
-                                                        setWorkKey={setWorkKey} 
-                                                    />}
+                    {currentPage === "Library" &&  <LibraryCopy setViewBook={setViewBook} setBook={setBook}/>}
 
                     {currentPage === "Borrowed Books" && <BorrowedBooks />}
                     {currentPage === "Borrower Logs" && <BorrowerLogs />}

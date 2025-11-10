@@ -4,7 +4,7 @@ import searchIcon from '../assets/search-icon.svg'
 import { useState, useEffect } from 'react';
 import { getBooks } from '../api/books'
 
-export default function Library({ setViewBook }){
+export default function Library({ setViewBook, setBook }){
 
     const [booksByCategory, setBooksByCategory] = useState({
         gen_info: [],
@@ -31,6 +31,8 @@ export default function Library({ setViewBook }){
             '800' : "Literature",
             '900' : "History & Geology",
         });
+
+    const allBooks = Object.values(booksByCategory).flat();
 
     const [booksBySearch, setBooksBySearch] = useState([]);
     const [search, setSearch] = useState("");
@@ -64,20 +66,23 @@ export default function Library({ setViewBook }){
         fetchBooks();
     }, []);
 
-    const handleSearch = async () => {
+    const handleSearch = () => {
 
-        if(!search.trim()){
+        const query = search.trim().toLowerCase();
+
+        if(!query) {
             setSearching(false);
+            setBooksBySearch([]);
             return;
         }
 
-        try {
-            const data = await getBooks({ generalSearch: search});
-            setBooksBySearch(data);
-        }catch (err){
-            console.log(err);
-        }
+        const filteredBooks = allBooks.filter(book => 
+            book.title.toLowerCase().includes(query) ||
+            book.author.toLowerCase().includes(query) || 
+            book.call_number.toLowerCase().includes(query)
+        )
 
+        setBooksBySearch(filteredBooks);
         setSearching(true);
     };
 
@@ -98,22 +103,26 @@ export default function Library({ setViewBook }){
                     </div>
                 </div>
 
-                {/*TODO: FIX SEARCH FUNCTION*/}
-
                 <div className={`${styles.searchScroll} ${searching ? styles.show : ""}`}>
-                    {booksBySearch.map((book, i) => (
-                        <div key ={i} className={styles.bookPanels} onClick={() => handleViewBook(book.title, book.author, book.cover_url, book.work_key)}>
-                            {book.cover_url && (
-                                <img
-                                    src={book.cover_path ? book.cover_path : searchIcon}
-                                    alt="Cover"
-                                    className={styles.bookCover}
-                                />
-                            )}
-                            <p>{book.title}</p>
-                            <p>{book.author}</p>
+                    {booksBySearch.length > 0 ? (
+                        booksBySearch.map((book, i) => (
+                            <div key ={i} className={styles.bookPanels}>
+                                {book.cover_path && (
+                                    <img
+                                        src={book.cover_path ? book.cover_path : searchIcon}
+                                        alt="Cover"
+                                        className={styles.bookCover}
+                                    />
+                                )}
+                                <p>{book.title}</p>
+                                <p>{book.author}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <div>
+                            <h1>No Book Found</h1>
                         </div>
-                    ))}
+                    )}
                 </div>
                 
                 {/*TODO: ADD BORROW BOOK FUNCTION */}
@@ -127,7 +136,13 @@ export default function Library({ setViewBook }){
                             <div className={styles.books}>
                                 {booksByCategory[category.toLowerCase()]?.length > 0 ? (
                                     booksByCategory[category.toLowerCase()].map((book, j) => (
-                                        <div key={j} className={styles.bookPanels} onClick={() => setViewBook(true)}> {/*TODO: FIX VIEW BOOKS*/}
+                                        <div key={j}
+                                            className={styles.bookPanels}
+                                            onClick={() => {
+                                                setViewBook(true);
+                                                setBook(book)
+                                            }
+                                        }>
                                             {book.cover_path && (
                                                 <img
                                                     src={book.cover_path}
