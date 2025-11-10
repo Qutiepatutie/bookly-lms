@@ -11,17 +11,18 @@ def add_books(request):
 
         call_number = data.get("callNumber")
         ISBN = data.get("isbn")
-        book_title = data.get("title")
+        title = data.get("title")
         edition = data.get("edition")
-        book_author = data.get("author")
+        author = data.get("author")
         publisher = data.get("publisher")
+        description = data.get("description")
         year_published = data.get("yearPublished")
         pages = data.get("pages")
-        book_cover_path = data.get("coverURL")
+        cover_path = data.get("coverURL")
         tags = data.get("tags")
         date_acquired = data.get("dateAcquired")
 
-        if not all([call_number, ISBN, book_title, book_author]):
+        if not all([call_number, ISBN, title, author]):
             return JsonResponse({'status': 'failed', 'message': 'missing important fields'})
         
         if Books.objects.filter(ISBN=ISBN, call_number=call_number).exists():
@@ -30,13 +31,14 @@ def add_books(request):
         Books.objects.create(
             call_number = call_number,
             ISBN = ISBN,
-            book_title = book_title,
+            title = title,
             edition = edition,
-            book_author = book_author,
+            author = author,
             publisher = publisher,
+            description = description,
             year_published = year_published,
             pages = pages,
-            book_cover_path = book_cover_path,
+            cover_path = cover_path,
             tags = tags,
             date_acquired = date_acquired
         )
@@ -44,3 +46,8 @@ def add_books(request):
         return JsonResponse ({'status': 'success', 'message':'Book Successfully Added!'})
     
     return JsonResponse({'status' : 'failed', 'message': 'Invalid Request'}) 
+
+def get_books(request):
+    
+    books = list(Books.objects.values())
+    return JsonResponse(books, safe=False)

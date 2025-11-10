@@ -35,9 +35,22 @@ export default function Sidebar({ onNavigate, isOpen, role }){
                         <p>Library</p>
                     </div>
 
-                    <div onClick={() => {setFocused("Borrowed Books"); onNavigate("Borrowed Books")}} className={focused === "Borrowed Books" ? styles.focused : ""}>
+                    <div
+                        onClick={() => {setFocused("Borrowed Books"); onNavigate("Borrowed Books")}}
+                        className={`focused === "Borrowed Books" ? styles.focused : ""
+                                    ${sessionStorage.getItem("role") === "admin" ? styles.hidden : ""}`}>
+
                         <img src={borrowedBooks} className={styles.icons}/>
                         <p>Borrowed Books</p>
+                    </div>
+
+                    <div
+                        onClick={() => {setFocused("Borrower Logs"); onNavigate("Borrower Logs")}}
+                        className={`${focused === "Borrower Logs" ? styles.focused : ""}
+                                    ${sessionStorage.getItem("role") === "admin" ? "" : styles.hidden}`}
+                    >
+                        <img src={borrowedBooks} className={styles.icons}/>
+                        <p>Borrower Logs</p>
                     </div>
 
                     <div

@@ -252,7 +252,7 @@ export default function AddBooks() {
                 </div>
                 <div className={styles.popUpButtons}>
                     <button onClick={() => closePopUp("submit")}>Cancel</button>
-                    <button onClick={handleConfirm}>Confirm</button>
+                    <button onClick={handleConfirm}>{loading ? "Confirming..." : "Confirm" }</button>
                 </div>
                 
             </dialog>

@@ -1,0 +1,107 @@
+.borrowerLogs {
+    margin: 0;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 50px;
+
+    align-items: center;
+    padding: 50px;
+    box-sizing: border-box;
+
+    margin-left: 3.5vw;
+    margin-top: 7vh;
+    width: 100vw;
+    height: 93vh;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+
+    /* background-color: grey; */
+}
+
+.header input {
+    width: 80%;
+    height: 100%;
+
+    border-radius: 50px;
+    border: none;
+
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-size: larger;
+
+    background-color: #EDEDED;
+}
+
+.header input:focus {
+    outline: 2px solid #4D643A;
+}
+
+.table {
+    height: auto;
+    width: 80%;
+    font-size: medium;
+
+    border: 1px solid #ededed;
+    text-align: left;
+
+    /* background-color: grey; */
+}
+
+.table span {
+    display: inline-block;
+    text-align: center;
+    align-content: center;
+    width: 5.5rem;
+    height: 2rem;
+    color: white;
+
+    border-radius: 50px;
+
+    background-color: rgba(85, 101, 64, 0.7);
+}
+
+.table table {
+    width: 100%;
+    height: 100%;
+
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.table th:nth-child(1) { width: 30px; }
+.table th:nth-child(2) { width: 200px; }
+.table th:nth-child(3) { width: 150px; }
+.table th:nth-child(4) { width: 250px; }
+.table th:nth-child(5) { width: 100px; text-align: center; }
+.table th:nth-child(6) { width: 120px; text-align: center; }
+
+.table td:nth-child(1) {
+    width: 30px;
+    width: 40px;
+    text-align: center;
+    border-right: 1px solid #ededed;
+}
+.table td:nth-child(5) { text-align: center;}
+.table td:nth-child(6) { text-align: center;}
+
+.table td,th {
+    padding-left: 10px;
+}
+
+.table td {
+    box-sizing: border-box;
+    vertical-align: top;
+    padding: 10px;
+}
+
+.table table tr:first-child{
+    height: 50px;
+    border-bottom: 1px solid #ededed;
+}

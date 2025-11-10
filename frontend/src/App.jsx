@@ -7,7 +7,9 @@ import Sidebar from './components/Sidebar.jsx'
 import Header from './components/Header.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Library from './pages/Library.jsx'
+import LibraryCopy from './pages/LibraryCopy.jsx'
 import BorrowedBooks from './pages/BorrowedBooks.jsx'
+import BorrowerLogs from './pages/BorrowerLogs.jsx'
 import AddBooks from './pages/AddBooks.jsx'
 
 import ViewBook from "./components/ViewBook.jsx"
@@ -55,7 +57,7 @@ export default function App(){
                     />
 
                     {currentPage === "Dashboard" && <Dashboard />}
-                    {currentPage === "Library" &&  <Library 
+                    {currentPage === "Library" &&  <LibraryCopy 
                                                         setViewBook={setViewBook}
                                                         setBookTitle={setBookTitle}
                                                         setBookAuthor={setBookAuthor}
@@ -64,6 +66,7 @@ export default function App(){
                                                     />}
 
                     {currentPage === "Borrowed Books" && <BorrowedBooks />}
+                    {currentPage === "Borrower Logs" && <BorrowerLogs />}
                     {currentPage === "Add Books" && <AddBooks />}
                 </div>
             }

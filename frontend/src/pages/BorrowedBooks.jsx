@@ -40,8 +40,32 @@ export default function BorrowedBooks(){
                     </div>
                 </div>
                 
+                {/*TODO: FIX BORROWED BOOKS PANEL*/}
                 <div className={styles.books}>
+                    <div className={styles.bookPanel}>
+                        <div className={styles.coverPlaceholder}>
 
+                        </div>
+                        <p className={`${styles.status} ${styles.active}`}>Active</p>
+                    </div>
+                    <div className={styles.bookPanel}>
+                        <div className={styles.coverPlaceholder}>
+
+                        </div>
+                        <p className={`${styles.status} ${styles.due}`}>Due</p>
+                    </div>
+                    <div className={styles.bookPanel}>
+                        <div className={styles.coverPlaceholder}>
+
+                        </div>
+                        <p className={`${styles.status} ${styles.overdue}`}>Overdue</p>
+                    </div>
+                    <div className={styles.bookPanel}>
+                        <div className={styles.coverPlaceholder}>
+
+                        </div>
+                        <p className={`${styles.status} ${styles.pending}`}>Pending</p>
+                    </div>
                 </div>
             </div>
         </>

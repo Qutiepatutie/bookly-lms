@@ -32,17 +32,22 @@ class Books(models.Model):
         blank=True,
     )
 
-    book_title = models.CharField(
+    title = models.CharField(
         max_length=200
     )
     
-    book_author = models.CharField(
+    author = models.CharField(
         max_length=100
     )
     
     edition = models.CharField(
         max_length=50,
         blank=True
+    )
+
+    description = models.TextField(
+        blank=True,
+        null=True
     )
 
     tags = models.JSONField(
@@ -63,7 +68,7 @@ class Books(models.Model):
     )
     
     #Media
-    book_cover_path = models.CharField(
+    cover_path = models.CharField(
         max_length=2048,
         blank=True,
         null=True,
@@ -78,7 +83,7 @@ class Books(models.Model):
         db_table = 'books'
 
     def __str__(self):
-        return self.book_title
+        return self.title
     
 class BorrowRecords(models.Model):
 

@@ -1,4 +1,4 @@
-export async function getBooks({ generalSearch="", category=""}) {
+/* export async function getBooks({ generalSearch="", category=""}) {
     let url = "http://127.0.0.1:8000/books?";
 
     if (generalSearch) {
@@ -13,7 +13,20 @@ export async function getBooks({ generalSearch="", category=""}) {
         throw new Error("Failed to fetch books");
     }
     return await res.json();
+} */
+
+export async function getBooks() {
+    const resp = await fetch("http://127.0.0.1:8000/getBooks/");
+
+    if(!resp.ok){
+        throw new Error("Failed to fetch Books");
+    }
+
+    const data = await resp.json();
+
+    return data;
 }
+
 
 export async function viewBookInfo(work_key) {
     const resp = await fetch(`http://127.0.0.1:8000/viewBook/?work_key=${work_key}`);
