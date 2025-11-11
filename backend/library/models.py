@@ -96,7 +96,7 @@ class BorrowRecords(models.Model):
         on_delete=models.CASCADE
     )
 
-    call_number = models.ForeignKey(
+    book = models.ForeignKey(
         Books,
         on_delete=models.CASCADE
     )

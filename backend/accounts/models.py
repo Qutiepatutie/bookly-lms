@@ -10,12 +10,7 @@ class RoleChoices(models.TextChoices):
     FACULTY = 'faculty', 'Faculty'
     ADMIN = 'admin', 'Admin'
 
-
-
 class UserLogin(models.Model):
-    id = models.AutoField(
-        primary_key=True,
-    )
 
     email = models.CharField(   
         max_length=100,

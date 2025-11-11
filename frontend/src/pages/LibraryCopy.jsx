@@ -155,8 +155,8 @@ export default function Library({ setViewBook, setBook }){
                                         </div>
                                     ))
                                 ) : (
-                                    <div className={styles.noBooks}>
-                                        <h1>No books available</h1>
+                                    <div style={{alignSelf: "center"}}>
+                                        <h1>No books available :(</h1>
                                     </div>
                                 )}
                             </div>

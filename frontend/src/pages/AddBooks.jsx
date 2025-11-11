@@ -83,6 +83,7 @@ export default function AddBooks() {
             return;
         }
 
+        setLoading(true);
         setInvalidISBN(false);
         setBookData(handleLoadData("Autofilling..."));
 
@@ -111,6 +112,7 @@ export default function AddBooks() {
         setBookData(updatedData);
         setEmptyFields(handleEmptyFields(updatedData));
         setAutofilled(true);
+        setLoading(false);
     }
 
     // Check valid cover image
@@ -252,7 +254,7 @@ export default function AddBooks() {
                 </div>
                 <div className={styles.popUpButtons}>
                     <button onClick={() => closePopUp("submit")}>Cancel</button>
-                    <button onClick={handleConfirm}>{loading ? "Confirming..." : "Confirm" }</button>
+                    <button onClick={handleConfirm} disabled={loading ? true : false}> {loading ? "Confirming..." : "Confirm" }</button>
                 </div>
                 
             </dialog>
@@ -418,7 +420,7 @@ export default function AddBooks() {
                         </div>
                         <div className={styles.buttons}>
                             <button onClick={handleClear}>Clear</button>
-                            <button onClick={handleCheckFields}>Add</button>
+                            <button onClick={handleCheckFields} disabled={loading}>Add</button>
                         </div>
                         
                     </div>

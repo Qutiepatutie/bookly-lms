@@ -86,10 +86,14 @@ def autofillBookInfo(request):
     isbn = request.GET.get("isbn")
 
     resp1 = requests.get(f"https://openlibrary.org/api/books?bibkeys=ISBN:{isbn}&format=json&jscmd=data")
-    data1 = resp1.json()
-    bookData1 = data1[f"ISBN:{isbn}"]
+    
+    try:
+        data1 = resp1.json()
+        bookData1 = data1[f"ISBN:{isbn}"]
+    except:
+        return JsonResponse({"message" : "no book found"})
 
-    if not bookData1: return JsonResponse({"message" : "no book found"})
+    if not bookData1 or not data1: return JsonResponse({"message" : "no book found"})
 
     workKey = bookData1.get("key").split("/")[2]
     resp2 = requests.get(f"https://openlibrary.org/books/{workKey}.json")
@@ -106,7 +110,7 @@ def autofillBookInfo(request):
         "title" : bookData1.get("title") or "Unknown",
         "author" : bookData1.get("authors")[0]["name"] or "Unknown",
         "edition" : bookData2.get("edition_name") or "Unknown",
-        "description" : bookData2.get("description", {}).get("value") or "None",
+        "description" : bookData2.get("description", {}) or bookData2.get("description", {}).get("value") or "None",
         "publisher" : bookData1.get("publishers")[0]["name"] or "Unknown",
         "year_published" : yearPublished,
         "date_acquired" : today,

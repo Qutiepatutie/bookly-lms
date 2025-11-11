@@ -1,8 +1,5 @@
-import { useState,useEffect } from "react"
-
 import close from "../assets/close-icon.svg"
 import styles from "../styles/viewbook.module.css"
-import huh from "../assets/placeholder.jpg"
 
 export default function ViewBook({ viewBook, setViewBook, book}) {
 
@@ -10,6 +7,8 @@ export default function ViewBook({ viewBook, setViewBook, book}) {
 
     return (
         <>
+            {/*TODO: ADD BORROW BOOK FUNCTION */}
+
             <div className={viewBook ? styles.container : styles.hidden}>
                 <div className={styles.viewBook}>
                     <div className={styles.bookCoverContainer}>
