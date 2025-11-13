@@ -19,7 +19,7 @@ export default function Sidebar({ onNavigate, isOpen, role }){
         <>
             <div className={`${styles.sidebar} ${extended ? styles.extended : ""}`}>
                 <div className={styles.header}>
-                    <img src={sessionStorage.getItem("role") === "admin" ? redLogo : greenLogo} className={styles.logo}/>
+                    <img src={sessionStorage.getItem("role") === "admin" ? greenLogo : greenLogo} className={styles.logo}/>
                     <h1>LibraSphere</h1>
                 </div>
                 <hr className={styles.divider} />

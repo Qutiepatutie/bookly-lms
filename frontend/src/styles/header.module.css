@@ -10,7 +10,7 @@
     box-sizing: border-box;
     padding: 0 50px 0 50px;
     width: 95.5vw;
-    height: 7vh;
+    height: 8vh;
     background-color: white;
     -webkit-box-shadow: 1px 23px 0px -21px var(--color); box-shadow: 1px 22px 0px -21px var(--color);
 }

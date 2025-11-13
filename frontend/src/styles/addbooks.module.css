@@ -49,9 +49,9 @@
 }
 
 .coverContainer:hover{
-    background-color: rgba(255,255,255,0.1);
-    color: rgb(77, 100, 58, .9);
+    background-color: #EDEDED;
     cursor: pointer;
+    font-weight: 540;
 }
 
 .coverContainer img{

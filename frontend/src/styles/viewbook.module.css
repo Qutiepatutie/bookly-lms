@@ -20,52 +20,55 @@
 
 .viewBook {
     display: flex;
-    height: 800px;
+    height: 100%;
     width: 1200px;
-
+    gap: 80px;
     padding: 20px;
     box-sizing: border-box;
-    
-    border-radius: 10px;
 
-    position: relative;
+    
+    justify-self: right;
+    margin-left: auto;
 
     background-color: white;
 }
 
 .bookCoverContainer {
     width: 40%;
-    padding: 40px;
-    display: flex;
-    justify-content: center;
+    position: relative;
     align-items: center;
+    display: flex;
+    margin-left: -250px;
+    pointer-events: none;
 }
 
 .bookCover {
-    height: 600px;
-    width: 400px;
+    height: 700px;
+    width: 500px;
     object-fit: cover;
     border-radius: 8px;
     background-color: #ededed;
+    
 
     box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
 }
 
 .bookInfo {
     height: 100%;
-    width: 50%;
+    width: 60%;
     padding: 20px;
     box-sizing: border-box;
+    margin-top: 45px;
 
     display: flex;
     flex-direction: column;
-
+    
     /* background-color: darkgray; */
 }
 
 .close {
     position: absolute;
-    right: 25px;
+    right: 55px;
     top: 25px;
     width: 14px;
     height: 14px;
@@ -86,12 +89,12 @@
 }
 
 .description {
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 20px;
     height: 400px;
     padding-right: 20px;
     overflow: wrap;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .details {
@@ -129,10 +132,11 @@
 
 .borrowButton {
     position: absolute;
-    right: 20px;
-    bottom: 20px;
+    right: 210px;
+    bottom: 35px;
     height: 40px;
     width: 225px;
+    
 
     border-radius: 10px;
     border: none;

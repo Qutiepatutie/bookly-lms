@@ -23,7 +23,7 @@ export default function Library({ setViewBook, setBook }){
             '001' : "General Information",
             '100' : "Philosophy & Psychology",
             '200' : "Religion",
-            '300' : "Scocial Sciences",
+            '300' : "Social Sciences",
             '400' : "Language",
             '500' : "Science",
             '600' : "Technology",
@@ -155,8 +155,8 @@ export default function Library({ setViewBook, setBook }){
                                         </div>
                                     ))
                                 ) : (
-                                    <div style={{alignSelf: "center"}}>
-                                        <h1>No books available :(</h1>
+                                    <div className={styles.noBooks}>
+                                        <h1>No Books Available</h1>
                                     </div>
                                 )}
                             </div>
