@@ -105,12 +105,21 @@ def autofillBookInfo(request):
     publishDate = bookData1.get("publish_date") or ""
     yearPublished = re.sub(r"[^0-9]", "", publishDate)[-4:] or "Unknown"
 
+    raw_desc = bookData2.get("description")
+    
+    if isinstance(raw_desc, dict):
+        desc = raw_desc.get("value") or "None"
+    elif isinstance(raw_desc, str):
+        desc = raw_desc
+    else:
+        desc = "None"
+
     return JsonResponse ({
         "message" : "book found",
         "title" : bookData1.get("title") or "Unknown",
         "author" : bookData1.get("authors")[0]["name"] or "Unknown",
         "edition" : bookData2.get("edition_name") or "Unknown",
-        "description" : bookData2.get("description", {}) or bookData2.get("description", {}).get("value") or "None",
+        "description" : desc,
         "publisher" : bookData1.get("publishers")[0]["name"] or "Unknown",
         "year_published" : yearPublished,
         "date_acquired" : today,
