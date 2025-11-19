@@ -37,7 +37,7 @@ export default function Sidebar({ onNavigate, isOpen, role }){
 
                     <div
                         onClick={() => {setFocused("Borrowed Books"); onNavigate("Borrowed Books")}}
-                        className={`focused === "Borrowed Books" ? styles.focused : ""
+                        className={`${focused === "Borrowed Books" ? styles.focused : ""}
                                     ${sessionStorage.getItem("role") === "admin" ? styles.hidden : ""}`}>
 
                         <img src={borrowedBooks} className={styles.icons}/>

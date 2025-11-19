@@ -24,24 +24,21 @@ export default function App(){
     const [isOpen, setIsOpen] = useState(false);
     const [viewBook, setViewBook] = useState(false);
 
-    const [role, setRole] = useState("");
-
     const [book, setBook] = useState(null);
 
     useEffect(() => {
         const loggedIn = sessionStorage.getItem("isLoggedIn") === "true";
         if(loggedIn){
             setIsAuthorized(true);
-            /* setRole(localStorage.getItem("role")); */
         }
     }, []);
 
     return (
         <>  
-            <Auth onLogIn={setIsAuthorized} isAuthorized={isAuthorized} setRole={setRole}/>
+            <Auth onLogIn={setIsAuthorized} isAuthorized={isAuthorized}/>
             {isAuthorized &&
                 <div className={`${styles.main} ${sessionStorage.getItem("role") === "admin" ? "admin" : ""}`}>
-                    <Sidebar onNavigate={setCurrentPage} isOpen={setIsOpen} role={role}/>
+                    <Sidebar onNavigate={setCurrentPage} isOpen={setIsOpen}/>
                     <Header currentPage={currentPage}/>
                     <Settings isOpen={isOpen} setIsOpen={setIsOpen} onLogOut={setIsAuthorized} setCurrentPage={setCurrentPage}/>
                     <ViewBook

@@ -4,7 +4,7 @@ import { login } from '../api/users.js'
 import styles from '../styles/authPage/loginform.module.css'
 import FormSwitcher from './FormSwitcher'
 
-export default function LoginForm({onSetForm, onLogIn, setRole}) {
+export default function LoginForm({onSetForm, onLogIn }) {
 
     const [emailInput, setEmailInput] = useState("");
     const [passInput, setPassInput] = useState("");
@@ -32,7 +32,6 @@ export default function LoginForm({onSetForm, onLogIn, setRole}) {
             sessionStorage.setItem("role", data.role);
 
             setInvalid(false);
-            setRole(sessionStorage.getItem("role"));
             onLogIn(true);
             setEmailInput("");
             setPassInput("");
