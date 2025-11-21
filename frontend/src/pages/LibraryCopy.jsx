@@ -4,7 +4,7 @@ import searchIcon from '../assets/search-icon.svg'
 import { useState, useEffect } from 'react';
 import { getBooks } from '../api/books'
 
-export default function Library({ setViewBook, setBook }){
+export default function Library({ setViewBook, setBook, book }){
 
     const [booksByCategory, setBooksByCategory] = useState({
         gen_info: [],
@@ -64,7 +64,7 @@ export default function Library({ setViewBook, setBook }){
         }
         
         fetchBooks();
-    }, []);
+    }, [book]);
 
     const handleSearch = () => {
 
@@ -140,7 +140,7 @@ export default function Library({ setViewBook, setBook }){
                                             className={styles.bookPanels}
                                             onClick={() => {
                                                 setViewBook(true);
-                                                setBook(book)
+                                                setBook({...book});
                                             }
                                         }>
                                             {book.cover_path && (

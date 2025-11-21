@@ -45,10 +45,11 @@ export default function App(){
                         viewBook={viewBook}
                         setViewBook={setViewBook}   
                         book={book}
+                        setBook={setBook}
                     />
 
                     {currentPage === "Dashboard" && <Dashboard />}
-                    {currentPage === "Library" &&  <LibraryCopy setViewBook={setViewBook} setBook={setBook}/>}
+                    {currentPage === "Library" &&  <LibraryCopy setViewBook={setViewBook} setBook={setBook} book={book}/>}
 
                     {currentPage === "Borrowed Books" && <BorrowedBooks />}
                     {currentPage === "Borrower Logs" && <BorrowerLogs />}

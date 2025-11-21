@@ -33,8 +33,11 @@ export default function AddBooks() {
     const [autofilled, setAutofilled] = useState(false);
     const [validCover, setValidCover] = useState(false);
 
+    const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [confirmMessage, setConfirmMessage] = useState(false);
+    const [show, setShow] = useState(false);
+    const [error, setError] = useState(false);
 
     // Clear fields
     const handleClear = () => {
@@ -178,14 +181,17 @@ export default function AddBooks() {
                 );
     };
     
-    const popups = {
-        submit : useRef(null),
-        confirm : useRef(null),  
-    }
+    const confirmRef = useRef(null);
 
-    const openPopUp = (curr) => popups[curr].current?.showModal();
-    const closePopUp = (curr) => popups[curr].current?.close();
+    const openPopUp = () => confirmRef.current?.showModal();
+    const closePopUp = () => {confirmRef.current?.close(); setOpen(false);}
         
+
+    // Message pop up
+    const notify = () => {
+        setShow(true);
+        setTimeout(() => setShow(false), 2000);
+    };
 
     // Check book infos
     const handleCheckFields = () => {
@@ -199,8 +205,9 @@ export default function AddBooks() {
             console.log("Empty Fields");
             return;
         }
-
-        openPopUp("submit");
+        
+        setOpen(true);
+        openPopUp();
     }
 
     // Confirmation Pop up
@@ -212,36 +219,28 @@ export default function AddBooks() {
 
         if(data.status == "failed"){
             setConfirmMessage(data.message);
-            openPopUp("confirm");
+            setError(true);
+            notify();
             return;
         }
 
         setConfirmMessage(data.message);
-        openPopUp("confirm");
-        return;
-    }
-
-    // Book Added Pop Up
-    const handleAdded = () => {
         setBookData(initialBookData);
         setAutofilled(false);
         setValidCover(false);
-        closePopUp("confirm");
-        closePopUp("submit");
+        closePopUp();
+        setError(false);
+        notify();
+        return;
     }
-
 
     return(
         <>
-            <dialog ref={popups.submit} className={styles.confirmPopUp}>
-                
-                <dialog ref={popups.confirm} className={styles.addedPopUp}>
-                    <p>{confirmMessage}</p>
-                    <button onClick={handleAdded}>
-                        Confirm
-                    </button>
-                </dialog>
-                
+            <div className={`${styles.addedPopUp} ${show ? styles.show : ""} ${error ? styles.error : ""}`}>
+                {confirmMessage}
+            </div>
+            {open && <div className={styles.backdrop} />}
+            <dialog ref={confirmRef} className={styles.confirmPopUp}>
                 <h2>Are you sure you want to add this book?</h2>
                 <div className={styles.cover}>
                    <img src={bookData.coverURL}/> 
@@ -253,7 +252,7 @@ export default function AddBooks() {
                     <p><span>ISBN:</span>{bookData.isbn}</p>
                 </div>
                 <div className={styles.popUpButtons}>
-                    <button onClick={() => closePopUp("submit")}>Cancel</button>
+                    <button onClick={() => closePopUp()}>Cancel</button>
                     <button onClick={handleConfirm} disabled={loading ? true : false}> {loading ? "Confirming..." : "Confirm" }</button>
                 </div>
                 

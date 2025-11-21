@@ -1,46 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { editBook,getBooks } from "../api/books";
 
 import close from "../assets/close-icon.svg"
 import styles from "../styles/viewbook.module.css"
 
-export default function ViewBook({ viewBook, setViewBook, book}) {
+export default function ViewBook({ viewBook, setViewBook, book, setBook}) {
 
     if(!viewBook || !book) return null;
 
-    const initialBookData = {
-        isbn: book.ISBN,
-        title: book.title,
-        author: book.author,
-        edition: book.edition,
-        description: book.description,
-        publisher: book.publisher,
-        yearPublished: book.year_published,
-        pages: book.pages,
-        callNumber: book.call_number,
-        tags: book.tags
-    };
-
-    const [bookData, setBookData] = useState(initialBookData);
+    const [savedBookData, setSavedBookData] = useState(book);
+    const [bookData, setBookData] = useState(book);
     const [editing, setEditing] = useState(false);
+    const [confirmMessage, setConfirmMessage] = useState("");
+    const [show, setShow] = useState(false);
+
+    const notify = () => {
+        setShow(true);
+        setTimeout(() => setShow(false), 2000);
+    };
 
     const handleChange = (e) => {
         const {name, value} = e.target;
 
         setBookData({ ...bookData, [name]: value});
         console.log(value);
-
-        setEmptyFields(prev => ({ ...prev, [name]: value.trim() === ""}));
     }
 
     const handleCancel = () => {
-        setBookData(initialBookData);
+        setBookData(savedBookData);
         setEditing(false);
     }
-    
+
+    const handleConfirm = async () => {
+
+        if(JSON.stringify(bookData) === JSON.stringify(savedBookData)){
+            setEditing(false);
+            return;
+        }
+
+        const data = await editBook(bookData);
+        setConfirmMessage(data.message);
+        setSavedBookData(bookData);
+        notify();
+        setEditing(false);
+
+        setBook({...bookData});
+    }
 
     return (
         <>
             {/*TODO: ADD BORROW BOOK FUNCTION */}
+
+            <div className={`${styles.toast} ${show ? styles.show : ""}`}>{confirmMessage}</div>
 
             <div className={viewBook ? styles.container : styles.hidden}>
                 <div className={styles.viewBook}>
@@ -61,7 +72,7 @@ export default function ViewBook({ viewBook, setViewBook, book}) {
                                 name="description"
                                 value={bookData.description}
                                 onChange={handleChange}
-                                readonly={!editing}
+                                readOnly={!editing}
                                 className={!editing ? styles.noEdit : ""}
                             />    
                         </p>
@@ -69,18 +80,18 @@ export default function ViewBook({ viewBook, setViewBook, book}) {
                             <p><span>CALL NUMBER:</span>
                                 <input
                                     name="callNumber"
-                                    value={bookData.callNumber}
+                                    value={bookData.call_number}
                                     onChange={handleChange}
-                                    readonly={!editing}
+                                    readOnly={!editing}
                                     className={!editing ? styles.noEdit : ""}
                                 />
                             </p>
                             <p><span>ISBN:</span>
                                 <input
                                     name="isbn"
-                                    value={bookData.isbn}
+                                    value={bookData.ISBN}
                                     onChange={handleChange}
-                                    readonly={!editing}
+                                    readOnly={!editing}
                                     className={!editing ? styles.noEdit : ""}
                                 />
                             </p>
@@ -89,7 +100,7 @@ export default function ViewBook({ viewBook, setViewBook, book}) {
                                     name="pages"
                                     value={bookData.pages}
                                     onChange={handleChange}
-                                    readonly={!editing}
+                                    readOnly={!editing}
                                     className={!editing ? styles.noEdit : ""}
                                 />
                             </p>
@@ -98,16 +109,16 @@ export default function ViewBook({ viewBook, setViewBook, book}) {
                                     name="publisher"
                                     value={bookData.publisher}
                                     onChange={handleChange}
-                                    readonly={!editing}
+                                    readOnly={!editing}
                                     className={!editing ? styles.noEdit : ""}
                                 />
                             </p>
                             <p><span>YEAR PUBLISHED:</span>
                                 <input
                                     name="yearPublished"
-                                    value={bookData.yearPublished}
+                                    value={bookData.year_published}
                                     onChange={handleChange}
-                                    readonly={!editing}
+                                    readOnly={!editing}
                                     className={!editing ? styles.noEdit : ""}
                                 />
                             </p>
@@ -116,7 +127,7 @@ export default function ViewBook({ viewBook, setViewBook, book}) {
                                         name="tags"
                                         value={bookData.tags}
                                         onChange={handleChange}
-                                        readonly={!editing}
+                                        readOnly={!editing}
                                         className={!editing ? styles.noEdit : ""}
                                     />
                                 
@@ -138,7 +149,7 @@ export default function ViewBook({ viewBook, setViewBook, book}) {
                         {editing &&
                             <div className={styles.editButtons}>
                                 <button onClick={handleCancel}>Cancel</button>
-                                <button>Save</button>
+                                <button onClick={handleConfirm}>Save</button>
                             </div>
                         }
                       </>   }

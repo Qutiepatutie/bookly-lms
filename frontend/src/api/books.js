@@ -27,6 +27,18 @@ export async function getBooks() {
     return data;
 }
 
+export async function editBook(data){
+  const response = await fetch('http://127.0.0.1:8000/editBook/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  });
+
+  return await response.json();
+}
+
 
 export async function viewBookInfo(work_key) {
     const resp = await fetch(`http://127.0.0.1:8000/viewBook/?work_key=${work_key}`);
