@@ -118,7 +118,11 @@ export default function ShowBook({ currBook, onConfirmEdit, showBook, setShowBoo
                 </div>
                 
                 <div className={styles.coverContainer}>
-                    <img className={styles.cover} src={bookDetails.cover_url}/>
+                    <img
+                        className={styles.cover}
+                        onClick={(e) => e.stopPropagation()}
+                        src={bookDetails.cover_url}
+                    />
                 </div>
                 
                 <div
