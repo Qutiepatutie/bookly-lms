@@ -52,7 +52,7 @@ LibraSphere/
 * Docker Desktop
 * WSL2 (For windows only)
 
->Link for installation guide: [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install#wsl-verification-and-setup)
+>Official Docker installation docs: [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
 ---
 
 ## SETUP INSTRUCTIONS
